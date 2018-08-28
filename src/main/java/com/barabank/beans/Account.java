@@ -2,10 +2,11 @@ package com.barabank.beans;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "account")
-public class Account {
+public class Account implements Serializable {
 
     private long id;
     private long customer;

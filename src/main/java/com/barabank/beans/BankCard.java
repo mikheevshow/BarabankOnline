@@ -1,15 +1,14 @@
 package com.barabank.beans;
 
-import org.joda.time.LocalDate;
+import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
 @Table(name = "bank_card")
-public class BankCard {
+public class BankCard implements Serializable {
 
     private long cardNumber;
     private long account;
@@ -17,6 +16,8 @@ public class BankCard {
     private int pin;
     private Date expirationDate;
 
+    @Id
+    @Column(name = "card_number")
     public long getCardNumber() {
         return cardNumber;
     }
@@ -25,6 +26,8 @@ public class BankCard {
         this.cardNumber = cardNumber;
     }
 
+    @ManyToOne
+    @Column(name = "account")
     public long getAccount() {
         return account;
     }
@@ -33,6 +36,7 @@ public class BankCard {
         this.account = account;
     }
 
+    @Column(name = "secutity_code")
     public int getSecurityCode() {
         return securityCode;
     }
@@ -41,6 +45,7 @@ public class BankCard {
         this.securityCode = securityCode;
     }
 
+    @Column(name = "pin")
     public int getPin() {
         return pin;
     }
@@ -49,6 +54,7 @@ public class BankCard {
         this.pin = pin;
     }
 
+    @Column(name = "expiration_date")
     public Date getExpirationDate() {
         return expirationDate;
     }
