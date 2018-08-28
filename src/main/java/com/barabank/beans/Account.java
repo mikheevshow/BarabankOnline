@@ -3,6 +3,7 @@ package com.barabank.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "account")
@@ -23,6 +24,7 @@ public class Account implements Serializable {
         this.id = id;
     }
 
+    @ManyToOne
     @Column(name = "customer")
     public long getCustomer() {
         return customer;
