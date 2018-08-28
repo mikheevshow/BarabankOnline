@@ -11,6 +11,7 @@
     <packaging>war</packaging>
 
     <dependencies>
+
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -75,7 +76,12 @@
             <version>2.10</version>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.3.5.Final</version>
+        </dependency>
 
 
     </dependencies>
