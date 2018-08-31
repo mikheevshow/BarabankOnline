@@ -1,10 +1,7 @@
 package com.barabank.beans;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -19,6 +16,8 @@ public class Person implements Serializable {
     private long id;
     private String address;
     private Date birthDate;
+
+
 
 
     @Column(name = "first_name")
@@ -76,6 +75,7 @@ public class Person implements Serializable {
         this.address = address;
     }
 
+    @Temporal(TemporalType.DATE)
     @Column(name = "birth_date")
     public Date getBirthDate() {
         return birthDate;
@@ -84,5 +84,19 @@ public class Person implements Serializable {
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone=" + phone +
+                ", id=" + id +
+                ", address='" + address + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
+    }
+
 }
 

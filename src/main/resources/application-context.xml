@@ -20,12 +20,17 @@
     <!--Подключаем фабрику сессий-->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
           p:dataSource-ref="dataSource"
+          p:packagesToScan="com.barabank.beans"
           p:hibernateProperties-ref="hibernateProperties"
     />
 
     <util:properties id="hibernateProperties">
         <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+        <prop key="hibernate.max_fetch_depth">3</prop>
+        <prop key="hibernate.show_sql">true</prop>
     </util:properties>
+
+    <context:component-scan base-package="com.barabank.beans"/>
 
     <!--Подключаем менеджер транзакций-->
     <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"

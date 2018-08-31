@@ -1,8 +1,11 @@
 package com.barabank.beans;
 
 
+import org.hibernate.annotations.Generated;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -11,10 +14,21 @@ public class Account implements Serializable {
 
     private long id;
     private long customer;
-    private double sum;
+    private BigDecimal sum;
 
+    public Account() {
+
+    }
+
+    public Account(long id, long customer, BigDecimal sum) {
+        this.id = id;
+        this.customer = customer;
+        this.sum = sum;
+    }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    //Тут нужен генератор
     @Column(name = "id")
     public long getId() {
         return id;
@@ -35,11 +49,11 @@ public class Account implements Serializable {
     }
 
     @Column(name = "sum")
-    public double getSum() {
+    public BigDecimal getSum() {
         return sum;
     }
 
-    public void setSum(double sum) {
+    public void setSum(BigDecimal sum) {
         this.sum = sum;
     }
 }
