@@ -1,6 +1,6 @@
 package com.barabank.service.logic;
 
-import com.barabank.beans.Transaction;
+//import com.barabank.beans.Transaction;
 import com.barabank.service.exceptions.*;
 
 import com.barabank.beans.Account;
@@ -18,7 +18,7 @@ public interface BankTransactionService {
 
     public void transferMoney(long fromAccount, long toAccount) throws insufficientFundsException;
 
-    public List<Transaction> getTransactionListForAccount(long account);
+    //public List<Transaction> getTransactionListForAccount(long account);
 
 
 }

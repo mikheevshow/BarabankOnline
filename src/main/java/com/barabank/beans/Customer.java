@@ -25,7 +25,7 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    @OneToOne
+
     @Column(name = "phone")
     public long getPhone() {
         return phone;
@@ -54,7 +54,7 @@ public class Customer implements Serializable {
     }
 
     public void addAccount(Account account) {
-        account.setCustomer(this.getId());
+        account.setCustomer(this);
         getAccounts().add(account);
 
     }

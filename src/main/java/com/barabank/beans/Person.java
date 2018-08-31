@@ -3,7 +3,7 @@ package com.barabank.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "person")
@@ -14,10 +14,8 @@ public class Person implements Serializable {
     private String lastName;
     private long phone;
     private long id;
-    private String address;
+    private String  address;
     private Date birthDate;
-
-
 
 
     @Column(name = "first_name")

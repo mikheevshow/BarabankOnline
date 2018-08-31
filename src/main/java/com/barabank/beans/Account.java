@@ -13,14 +13,14 @@ import java.util.List;
 public class Account implements Serializable {
 
     private long id;
-    private long customer;
+    private Customer customer;
     private BigDecimal sum;
 
     public Account() {
 
     }
 
-    public Account(long id, long customer, BigDecimal sum) {
+    public Account(long id, Customer customer, BigDecimal sum) {
         this.id = id;
         this.customer = customer;
         this.sum = sum;
@@ -38,13 +38,13 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne
-    @Column(name = "customer")
-    public long getCustomer() {
+   @ManyToOne
+   @JoinColumn(name = "customer")
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(long customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -55,5 +55,14 @@ public class Account implements Serializable {
 
     public void setSum(BigDecimal sum) {
         this.sum = sum;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", sum=" + sum +
+                '}';
     }
 }
