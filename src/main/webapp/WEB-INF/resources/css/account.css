@@ -1,0 +1,133 @@
+ody {
+    font-family: Helvetica;
+    background-color: rgb(250, 250, 250);
+}
+
+a {
+    text-decoration: none;
+}
+
+.container-account {
+    margin-top: 150px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin: 20px;
+}
+
+
+.button-type-one {
+    height: 37px;
+    width: 192px;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0 ,0, 0.1);
+    font-weight: 600;
+    line-height: 37px;
+    vertical-align: middle;
+    transition: 0.3s;
+}
+
+.button-type-one:hover {
+    cursor: pointer;
+}
+
+.create-transaction-button {
+    background-color: rgb(53, 179, 126);
+    border: 1px solid rgb(50, 154, 87);
+    color: white;
+}
+.create-transaction-button:hover {
+    background-color: rgb(33, 159, 106);
+    transition: 0.3s;
+}
+
+.order-debit-card-button {
+    background-color: rgb(255, 189, 0);
+    border: 1px solid rgb(225, 159, 0);
+    color: rgb(94, 94, 94);
+}
+
+.order-debit-card-button:hover {
+    background-color: rgb(235, 169, 0);
+    transition: 0.3s;
+}
+
+.replenish-funds-button {
+    color: white;
+    background-color: rgb(0, 130, 255);
+    border: 1px solid rgb(0, 100, 225);
+    transition: 0.3s;
+}
+.replenish-funds-button:hover {
+    background-color: rgb(0, 100, 225);
+    transition: 0.3s;
+}
+
+.account-info-container {
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    margin: 20px;
+    background-color: rgb(248, 249, 250);
+    border: 1px solid rgb(234,234,234);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 0 ,0, 0.05);
+}
+
+@media (max-width: 649px) {
+    .account-info-container {
+        flex-wrap: wrap;
+    }
+}
+
+.account-info-container__info{
+
+}
+
+.account-info-container__h1 {
+    font-size: 24px;
+    margin: 20px 50px;
+    color: rgb(94,94,94);
+}
+
+.informtion-line {
+    margin-left: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: rgb(94,94,94);
+    font-weight: 600;
+}
+
+.get-account-info-button {
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    margin:20px;
+    color: rgb(53, 179, 126);
+    background-color: rgb(248, 249, 250);
+    height: 30px;
+    width: 210px;
+    line-height: 30px;
+    vertical-align: middle;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.11);
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+.get-account-info-button:hover {
+    background-color: rgb(240, 241, 252);
+    transition: 0.3s;
+    cursor: pointer;
+}

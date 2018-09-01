@@ -1,0 +1,43 @@
+.regular-button {
+
+    width: 150px;
+    height: 30px;
+
+    margin: 10px;
+
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+
+    color: white;
+    background-color: darkgray;
+    border-radius: 2px;
+
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 300;
+
+    cursor: pointer;
+
+}
+
+.regular-button:hover {
+
+}
+
+.green-button {
+    border: 1px solid rgb(76, 174, 76);
+    background-color: rgb(92, 184, 92);
+}
+.green-button:hover {
+    background-color: rgb(76, 174, 76);
+}
+
+.blue-button {
+    border: 1px solid #2e6da4;
+    background-color: #337ab7;
+}
+
+.blue-button:hover {
+    background-color: #3a6487;
+}

@@ -1,0 +1,108 @@
+.fixed {
+    width: 100%;
+    position: fixed;
+}
+.information-bar {
+    /*Sizing*/
+    width: 100%;
+    min-height: 50px;
+    /*Text*/
+    font-size: 12pt;
+    color: #333;
+    /*Flex*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    /*Color And Shadows*/
+    background-color: #FAFAFA;
+    box-shadow: 0 1px 1px rgba(0,0,0,.075);
+    /*Borders*/
+
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.information-bar__greeting {
+    /*Text*/
+    font-size: 12px;
+    /*Borders*/
+    padding-left: 10px;
+}
+
+.enter-to-bank {
+    padding: 5px;
+    border: 1px solid rgb(0, 164, 150);
+    border-radius: 2px;
+    color: white;
+    background-color: rgb(0, 164, 187);
+    font-weight: 600;
+}
+
+.enter-to-bank:hover {
+    background-color:rgb(0, 144, 157);
+}
+
+.header {
+    /*Sizing*/
+    width: 100%;
+    min-height: 70px;
+    /*Text*/
+    font-size: 14px;
+    color: #FAFAFA;
+    /*Flex*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    /*Color And Shadows*/
+    background-color: rgb(48, 58, 68);
+
+}
+
+.header__logo {
+    /*Text*/
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.header__logo:hover {
+    color: rgb(0, 164, 187);
+    transition: 0.1s;
+}
+
+.header__menu {
+
+}
+
+.header__menu ul{
+    /*Flex*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+}
+
+.header__menu li {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.header__menu li:hover{
+    color: rgb(0, 164, 187);
+    transition: 0.1s;
+}
+
+.signInSingOut {
+    display: flex;
+    flex-direction: row;
+}
+
+.inline-button {
+    color: #333333;
+    margin-right: 20px;
+}
