@@ -9,11 +9,11 @@
 <html>
 <head>
     <title>Barabånk - входа</title>
-    <%@include file="WEB-INF/page_members/styles.jsp"%>
+    <%@include file="WEB-INF/views/page_members/styles.jsp"%>
 </head>
 <body>
 
-<%@include file="WEB-INF/page_members/header.jsp"%>
+<%@include file="WEB-INF/views/page_members/header.jsp"%>
 
 <div class = "blocks">
     <div class="autorization-block">
@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<%@include file="WEB-INF/page_members/footer.jsp"%>
+<%@include file="WEB-INF/views/page_members/footer.jsp"%>
 
 </body>
 </html>
