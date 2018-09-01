@@ -14,4 +14,5 @@ public interface BankAccountService {
     public BigDecimal getBalanceWithAccountId(long accountNumber);
 
     public BigDecimal getBalandeWithCardNumber(long cardNumber);
+
 }

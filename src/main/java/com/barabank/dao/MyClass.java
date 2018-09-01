@@ -9,5 +9,9 @@ public class MyClass {
         ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 
         System.out.println("Контекст создан");
+
+        BarabankDao barabankDao = (BarabankDao) context.getBean("barabankDao");
+
+        System.out.println(barabankDao.findAll().get(0).getPhone());
     }
 }

@@ -12,7 +12,7 @@ public class Customer implements Serializable {
     private long id;
     private long phone;
     private String password;
-    private List<Account> accounts = new ArrayList<Account>();
+   // private List<Account> accounts = new ArrayList<Account>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,32 +44,31 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    public List<Account> getAccounts() {
-        return accounts;
-    }
+//   // @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//   // public List<Account> getAccounts() {
+//        return accounts;
+//    }
 
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
-
-    public void addAccount(Account account) {
-        account.setCustomer(this);
-        getAccounts().add(account);
-
-    }
-
-    public void removeAccount(Account account) {
-        getAccounts().remove(account);
-    }
+//    public void setAccounts(List<Account> accounts) {
+//        this.accounts = accounts;
+//    }
+//
+//    public void addAccount(Account account) {
+//        account.setCustomer(this);
+//        getAccounts().add(account);
+//
+//    }
+//
+//    public void removeAccount(Account account) {
+//        getAccounts().remove(account);
+//    }
 
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
                 ", phone=" + phone +
-                ", password='" + password + '\'' +
-                ", accounts=" + accounts +
+                ", password='" + password +
                 '}';
     }
 }

@@ -22,7 +22,7 @@ public class BarabankDao implements Dao {
 
     @Transactional(readOnly = true)
     public List<Customer> findAll() {
-        return sessionFactory.getCurrentSession().createQuery("select c from Customer c").list();
+        return sessionFactory.getCurrentSession().createQuery("from Customer c").list();
     }
     public List<Customer> findAllWithDetail() {
         return null;
