@@ -9,10 +9,10 @@
 <html>
 <head>
     <title>Barabånk - регистрация нового пользователя</title>
-    <%@include file="WEB-INF/page_members/styles.jsp"%>
+    <%@include file="/WEB-INF/views/page_members/styles.jsp"%>
 </head>
 <body>
-<%@include file="WEB-INF/views/page_members/header.jsp"%>
+<%@include file="/WEB-INF/views/page_members/header.jsp"%>
 
 <div class = "content">
     <h1>Регистрация нового клиента Barabånk</h1>
@@ -49,6 +49,6 @@
     </form>
 </div>
 
-<%@include file="WEB-INF/page_members/footer.jsp"%>
+<%@include file="/WEB-INF/views/page_members/footer.jsp"%>
 </body>
 </html>

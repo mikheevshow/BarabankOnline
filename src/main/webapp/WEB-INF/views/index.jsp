@@ -10,17 +10,17 @@
 <html>
 <head>
     <title>Barabånk - главная</title>
-    <%@include file="WEB-INF/page_elements/styles.jsp"%>
+    <%@include file="/WEB-INF/views/page_members/styles.jsp"%>
 </head>
 <body class="site">
 
-<%@include file="WEB-INF/page_elements/header.jsp" %>
+<%@include file="/WEB-INF/views/page_members/header.jsp" %>
 
 <div class="content">
     Это главная страница Barabånk.
 </div>
 
-<%@include file="WEB-INF/page_elements/footer.jsp" %>
+<%@include file="/WEB-INF/views/page_members/footer.jsp" %>
 
 </body>
 </html>
