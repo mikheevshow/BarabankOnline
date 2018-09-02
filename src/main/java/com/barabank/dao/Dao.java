@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * @author Ilya Mikheev
+ * Интерфейс, определяющий поведение объекта DAO
  */
 
 

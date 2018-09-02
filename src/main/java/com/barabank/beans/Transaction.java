@@ -41,7 +41,7 @@ public class Transaction implements Serializable {
         return toAccount;
     }
 
-    public void setToLong(BigInteger toAccount) {
+    public void setToAccount(BigInteger toAccount) {
         this.toAccount = toAccount;
     }
 

@@ -3,6 +3,7 @@ package com.barabank.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 
 @Entity
@@ -12,8 +13,8 @@ public class Person implements Serializable {
     private String firstName;
     private String middleName;
     private String lastName;
-    private long phone;
-    private long id;
+    private BigInteger phone;
+    private BigInteger id;
     private String  address;
     private Date birthDate;
 
@@ -46,21 +47,21 @@ public class Person implements Serializable {
     }
 
     @Column(name = "phone")
-    public long getPhone() {
+    public BigInteger getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(BigInteger phone) {
         this.phone = phone;
     }
 
     @Id
     @Column(name = "id")
-    public long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 

@@ -34,7 +34,7 @@ public class BankCard implements Serializable {
         this.account = account;
     }
 
-    @Column(name = "secutity_code")
+    @Column(name = "security_code")
     public int getSecurityCode() {
         return securityCode;
     }
