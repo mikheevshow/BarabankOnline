@@ -7,6 +7,4 @@ public interface UserService {
 
     public Customer findCustomerByPhone(long phone) throws UserNotExistException;
 
-
-
 }

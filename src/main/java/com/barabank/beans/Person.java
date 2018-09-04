@@ -6,6 +6,11 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
 
+/**
+ * @author Ilya Mikheev
+ *
+ */
+
 @Entity
 @Table(name = "person")
 public class Person implements Serializable {
@@ -13,8 +18,8 @@ public class Person implements Serializable {
     private String firstName;
     private String middleName;
     private String lastName;
-    private BigInteger phone;
-    private BigInteger id;
+    private long phone;
+    private long id;
     private String  address;
     private Date birthDate;
 
@@ -47,21 +52,21 @@ public class Person implements Serializable {
     }
 
     @Column(name = "phone")
-    public BigInteger getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(BigInteger phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
     @Id
     @Column(name = "id")
-    public BigInteger getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(long id) {
         this.id = id;
     }
 

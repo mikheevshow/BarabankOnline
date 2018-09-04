@@ -6,7 +6,13 @@ import org.hibernate.annotations.Generated;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
+
+/**
+ * @author Ilya Mikheev
+ *
+ */
 
 @Entity
 @Table(name = "account")

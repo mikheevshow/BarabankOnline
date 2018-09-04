@@ -2,7 +2,12 @@ package com.barabank.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigInteger;
 
+/**
+ * @author Ilya Mikheev
+ *
+ */
 
 @Entity
 @Table(name = "customer")

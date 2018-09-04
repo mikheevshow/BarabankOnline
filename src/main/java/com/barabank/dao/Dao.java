@@ -1,13 +1,14 @@
 package com.barabank.dao;
 
 import com.barabank.beans.*;
+
+import java.math.BigInteger;
 import java.util.List;
 
 /**
  * @author Ilya Mikheev
  * Интерфейс, определяющий поведение объекта DAO
  */
-
 
 public interface Dao {
 
@@ -31,11 +32,12 @@ public interface Dao {
     public Account saveAccount(Account account);
 
     public List<BankCard> getAccountBindedCards(long account_number);
-    public BankCard addCardForAccount(long account_id);
+    public BankCard findCardByCardNumber(long card_number);
+   // public BankCard addCardForAccount(BigInteger account_id);
     public Account findAccountByCardNumber(long card_number);
 
     public List<Transaction> findAllTransactionsForAccount(long account_id);
-    public List<Transaction> findAllSendedAccountTransactions(long account_id);
+    public List<Transaction> findAllSentAccountTransactions(long account_id);
     public List<Transaction> findAllReceivedAccountTransactions(long account_id);
     public Transaction saveTransaction(Transaction transaction);
 

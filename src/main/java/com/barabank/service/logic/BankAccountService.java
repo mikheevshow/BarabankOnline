@@ -9,10 +9,10 @@ public interface BankAccountService {
 
     public Account openBankAccount(boolean createCard);
 
-    public void addCardToAccount(BigInteger accountNumber);
+    public void addCardToAccount(long accountNumber);
 
     public BigDecimal getBalanceWithAccountId(long accountNumber);
 
-    public BigDecimal getBalandeWithCardNumber(long cardNumber);
+    public BigDecimal getBalanceWithCardNumber(long cardNumber);
 
 }

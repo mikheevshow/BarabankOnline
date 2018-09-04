@@ -1,9 +1,14 @@
 package com.barabank.beans;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.sql.Date;
 import javax.persistence.*;
 
+/**
+ * @author Ilya Mikheev
+ *
+ */
 
 @Entity
 @Table(name = "bank_card")
