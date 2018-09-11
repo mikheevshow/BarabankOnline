@@ -1,6 +1,8 @@
 package com.barabank.beans;
 
 
+import org.joda.time.LocalDate;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,7 +22,11 @@ public class Transaction implements Serializable {
     private long fromAccount;
     private long toAccount;
     private BigDecimal sum;
-    private Date date;
+    private LocalDate date;
+
+    public Transaction() {
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,13 +66,13 @@ public class Transaction implements Serializable {
         this.sum = sum;
     }
 
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @Column(name = "date")
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
+//    @Temporal(value = TemporalType.TIMESTAMP)
+//    @Column(name = "date")
+//    public Date getDate() {
+//        return date;
+//    }
+//
+//    public void setDate(Date date) {
+//        this.date = date;
+//    }
 }

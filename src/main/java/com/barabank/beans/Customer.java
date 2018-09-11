@@ -18,6 +18,10 @@ public class Customer implements Serializable {
     private String password;
    // private List<Account> accounts = new ArrayList<Account>();
 
+    public Customer() {
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,7 +32,6 @@ public class Customer implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-
 
     @Column(name = "phone")
     public long getPhone() {

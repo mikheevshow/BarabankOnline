@@ -16,7 +16,7 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 @Repository("barabankDao")
-public class BarabankDao implements Dao {
+public class BarabankDao implements BankDao {
 
     private final SessionFactory sessionFactory;
 
@@ -35,12 +35,12 @@ public class BarabankDao implements Dao {
 
 
     public Person findPersonPassportID(long ID) {
-        return (Person) getSessionFactory().getCurrentSession().createQuery("FROM Person p WHERE p.id = :ID").uniqueResult();
+        return (Person) getSessionFactory().getCurrentSession().createQuery("FROM Person p WHERE p.id = :ID").setParameter("ID", ID).uniqueResult();
     }
 
 
     public Person findPersonByPhone(long person_phone) {
-        return (Person) getSessionFactory().getCurrentSession().createQuery("FROM Person p WHERE p.phone = :phone").uniqueResult();
+        return (Person) getSessionFactory().getCurrentSession().createQuery("FROM Person p WHERE p.phone = :phone").setParameter("phone", person_phone).uniqueResult();
     }
 
     @Transactional(readOnly = false)
@@ -60,11 +60,11 @@ public class BarabankDao implements Dao {
     }
 
     public Customer findCustomerByPhone(long customer_phone) {
-        return (Customer) getSessionFactory().getCurrentSession().createQuery("FROM Customer c WHERE c.phone = :customer_phone").uniqueResult();
+        return (Customer) getSessionFactory().getCurrentSession().createQuery("FROM Customer c WHERE c.phone = :customer_phone").setParameter("customer_phone", customer_phone).uniqueResult();
     }
 
     public Customer findById(long id) {
-        return (Customer) getSessionFactory().getCurrentSession().createQuery("FROM Customer c WHERE c.id = :id").uniqueResult();
+        return (Customer) getSessionFactory().getCurrentSession().createQuery("FROM Customer c WHERE c.id = :id").setParameter("id", id).uniqueResult();
     }
 
     @Transactional(readOnly = false)
@@ -79,25 +79,24 @@ public class BarabankDao implements Dao {
         return customer;
     }
 
-    public List<Account> findAllAccountsForCustomer(Customer user) {
+    public List<Account> findAllAccountsForCustomer(Customer customer) {
         //BigInteger customer_id = user.getId();
-        return getSessionFactory().getCurrentSession().createQuery("FROM Account a WHERE  a.customer = :user").list();
+        return getSessionFactory().getCurrentSession().createQuery("FROM Account a WHERE  a.customer = :customer").setParameter("customer", customer).list();
     }
 
     public List<Account> findAllAccountWithCustomerPhone(long phone) {
         Customer customer = findCustomerByPhone(phone);
-        return getSessionFactory().getCurrentSession().createQuery("FROM Account a WHERE a.customer = :customer").list();
+        return getSessionFactory().getCurrentSession().createQuery("FROM Account a WHERE a.customer = :customer").setParameter("customer", customer).list();
     }
 
     public Account findAccountByAccountId(long account_id) {
-        return (Account) getSessionFactory().getCurrentSession().createQuery("FROM Account a WHERE a.id = :account_id").uniqueResult();
+        return (Account) getSessionFactory().getCurrentSession().createQuery("FROM Account a WHERE a.id = :account_id").setParameter("account_id", account_id).uniqueResult();
     }
 
     @Transactional(readOnly = false)
     public void addAccountForCustomer(Customer customer) {
 
-        Customer c = customer;
-        getSessionFactory().getCurrentSession().createQuery("INSERT INTO Account(id, customer, sum) SELECT customer FROM Customer c");
+        //getSessionFactory().getCurrentSession().createQuery("INSERT INTO Account(id, customer, sum) SELECT customer FROM Customer c");
     }
 
     @Transactional(readOnly = false)
@@ -114,7 +113,7 @@ public class BarabankDao implements Dao {
 
     public List<BankCard> getAccountBindedCards(long account_number) {
 
-        return getSessionFactory().getCurrentSession().createQuery("FROM BankCard bc WHERE bc.account = :account_number").list();
+        return getSessionFactory().getCurrentSession().createQuery("FROM BankCard bc WHERE bc.account = :account_number").setParameter("account_number", account_number).list();
     }
 
 //    @Transactional(readOnly = false)
@@ -124,7 +123,7 @@ public class BarabankDao implements Dao {
 //    }
 
     public BankCard findCardByCardNumber(long card_number) {
-        return (BankCard) getSessionFactory().getCurrentSession().createQuery("FROM BankCard bc WHERE bc.cardNumber = :card_number").uniqueResult();
+        return (BankCard) getSessionFactory().getCurrentSession().createQuery("FROM BankCard bc WHERE bc.cardNumber = :card_number").setParameter("card_number", card_number).uniqueResult();
     }
 
     public Account findAccountByCardNumber(long card_number) {
@@ -133,16 +132,16 @@ public class BarabankDao implements Dao {
     }
 
     public List<Transaction> findAllTransactionsForAccount(long account_id) {
-        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.fromAccount = :account_id OR t.toAccount = :account_id ").list();
+        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.fromAccount = :account_id OR t.toAccount = :account_id ").setParameter("account_id", account_id).list();
     }
 
     public List<Transaction> findAllSentAccountTransactions(long account_id) {
-        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.fromAccount = :account_id").list();
+        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.fromAccount = :account_id").setParameter("account_id", account_id).list();
     }
 
     public List<Transaction> findAllReceivedAccountTransactions(long account_id) {
 
-        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.toAccount = :account_id").list();
+        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.toAccount = :account_id").setParameter("account_id", account_id).list();
     }
 
     @Transactional(readOnly = false)

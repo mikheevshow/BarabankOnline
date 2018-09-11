@@ -20,6 +20,10 @@ public class BankCard implements Serializable {
     private int pin;
     private Date expirationDate;
 
+    public BankCard() {
+
+    }
+
     @Id
     @Column(name = "card_number")
     public long getCardNumber() {

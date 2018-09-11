@@ -18,7 +18,7 @@
 <div class = "blocks">
     <div class="autorization-block">
 
-        <form class = "autorization-block__form" action="${pageContext.request.contextPath}/authentication" method="POST">
+        <form class = "autorization-block__form" action="${pageContext.request.contextPath}/login" method="POST">
             <h1>Вход в личный кабинет</h1>
             ${userStatus}
             <div>

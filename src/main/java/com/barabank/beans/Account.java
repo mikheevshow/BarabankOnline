@@ -26,12 +26,6 @@ public class Account implements Serializable {
 
     }
 
-    public Account(long id, Customer customer, BigDecimal sum) {
-        this.id = id;
-        this.customer = customer;
-        this.sum = sum;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -53,7 +47,7 @@ public class Account implements Serializable {
         this.customer = customer;
     }
 
-    @Column(name = "sum")
+    @Column(name = "balance")
     public BigDecimal getSum() {
         return sum;
     }

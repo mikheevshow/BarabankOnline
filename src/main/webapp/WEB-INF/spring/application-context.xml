@@ -7,8 +7,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+
     <!--Подключаем файл свойств-->
-    <context:property-placeholder location="config.properties"/>
+    <context:property-placeholder location="classpath:config.properties"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -33,7 +34,6 @@
 
     <context:component-scan base-package="com.barabank.beans"/>
 
-
     <!--Подключаем менеджер транзакций-->
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"
         p:sessionFactory-ref="sessionFactory"/>
@@ -46,6 +46,8 @@
     <!--Подключаем объект доступа к данным -->
     <bean id="barabankDao" class="com.barabank.dao.BarabankDao"/>
 
+    <bean id="service" class="com.barabank.service.logic.BankService"/>
 
+    <bean id="barabankTransactionReportService" class="com.barabank.service.logic.BarabankTransactionReportService"/>
 
 </beans>

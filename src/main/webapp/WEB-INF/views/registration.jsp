@@ -19,31 +19,39 @@
     <form class="registration-form" action="/registration" method="POST">
         <div class="cont">
             <label>Имя:<star>*</star></label>
-            <input class="input" type="firstName" placeholder="Имя">
+            <input class="input" name="first-name" placeholder="Имя">
         </div>
         <div>
             <label>Фамилия:<star>*</star></label>
-            <input class="input" type="secondName" placeholder="Фамилия">
+            <input class="input" name="second-name" placeholder="Фамилия">
         </div>
         <div>
             <label>Отчество(при наличии): </label>
-            <input class="input" type="middleName" placeholder="Отчество">
+            <input class="input" name="middle-name" placeholder="Отчество">
         </div>
         <div>
             <label>Паспортные данные ID:<star>*</star></label>
-            <input class="input" type="ID" placeholder="ID">
+            <input class="input" name="ID" placeholder="ID">
         </div>
         <div>
             <label>Телефон:<star>*</star></label>
-            <input class="input" type="telephone" placeholder="Телефон">
+            <input class="input" name="telephone" placeholder="Телефон">
+        </div>
+        <div>
+            <label>Адрес:<star>*</star></label>
+            <input class="input" name="address" placeholder="Адрес">
+        </div>
+        <div>
+            <label>Дата рождения:<star>*</star></label>
+            <input class="input" type="date" name="birth-day" placeholder="Телефон">
         </div>
         <div>
             <label>Пароль:<star>*</star></label>
-            <input class="input" type="password" placeholder="Пароль">
+            <input class="input" type="password" name="password" placeholder="Пароль">
         </div>
         <div>
             <label>Подтвердите пароль:<star>*</star></label>
-            <input class="input" type="password" placeholder="Подтверждение пароля">
+            <input class="input" type="password" name="repeat-password" placeholder="Подтверждение пароля">
         </div>
         <button class = "regular-button green-button" type="submit">Подтвердить</button>
     </form>

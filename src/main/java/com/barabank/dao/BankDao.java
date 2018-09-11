@@ -10,7 +10,7 @@ import java.util.List;
  * Интерфейс, определяющий поведение объекта DAO
  */
 
-public interface Dao {
+public interface BankDao {
 
     public List<Person> findAllPersons();
     public Person findPersonPassportID(long ID);

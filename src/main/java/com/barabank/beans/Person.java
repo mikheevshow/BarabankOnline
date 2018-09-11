@@ -23,6 +23,9 @@ public class Person implements Serializable {
     private String  address;
     private Date birthDate;
 
+    public Person() {
+
+    }
 
     @Column(name = "first_name")
     public String getFirstName() {

@@ -73,6 +73,7 @@ star {
     padding: 20px;
     border-radius: 2px;
     border: 1px solid #ccc;
+    height: 100%;
 }
 
 .registration-form {
