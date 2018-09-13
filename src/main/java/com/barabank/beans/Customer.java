@@ -19,7 +19,7 @@ public class Customer implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @Column(name = "phone", nullable = false, unique = true, updatable = false, insertable = false)
+    @Column(name = "phone", nullable = false, unique = true, updatable = false)
     private long phone;
 
     @Column(name = "password",nullable = false)
@@ -77,11 +77,19 @@ public class Customer implements Serializable {
         getAccounts().remove(account);
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
-                ", phone=" + phone +
+                ", id=" + id +
+                ", phone" + phone +
                 ", password='" + password +
                 '}';
     }

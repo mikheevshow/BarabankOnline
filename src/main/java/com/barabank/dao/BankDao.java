@@ -12,8 +12,9 @@ import java.util.List;
 
 public interface BankDao {
 
+
     public List<Person> findAllPersons();
-    public Person findPersonPassportID(long ID);
+    public Person findPersonWithPassportID(long ID);
     public Person findPersonByPhone(long person_phone);
     public Person updatePerson(Person person);
     public void savePerson(Person person);

@@ -29,12 +29,24 @@ public class BarabankDao implements BankDao {
         return sessionFactory;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
     public List<Person> findAllPersons() {
         return getSessionFactory().getCurrentSession().createQuery("FROM Person p").list();
     }
 
 
-    public Person findPersonPassportID(long ID) {
+    public Person findPersonWithPassportID(long ID) {
         return (Person) getSessionFactory().getCurrentSession().createQuery("FROM Person p WHERE p.id = :ID").setParameter("ID", ID).uniqueResult();
     }
 
@@ -53,6 +65,23 @@ public class BarabankDao implements BankDao {
     public void savePerson(Person person) {
         getSessionFactory().getCurrentSession().save(person);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public List<Customer> findAllCustomers() {
         return getSessionFactory().getCurrentSession().createQuery("FROM Customer c").list();
@@ -76,6 +105,27 @@ public class BarabankDao implements BankDao {
     public void saveCustomer(Customer customer) {
         getSessionFactory().getCurrentSession().save(customer);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public List<Account> findAllAccountsForCustomer(Customer customer) {
         //BigInteger customer_id = user.getId();
@@ -127,6 +177,23 @@ public class BarabankDao implements BankDao {
         long account_number = findCardByCardNumber(card_number).getCardNumber();
         return findAccountByAccountId(account_number);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

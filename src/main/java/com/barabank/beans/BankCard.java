@@ -15,19 +15,19 @@ import java.time.LocalDateTime;
 public class BankCard implements Serializable {
 
     @Id
-    @Column(name = "card_number")
+    @Column(name = "card_number", nullable = false, unique = true, updatable = false)
     private long cardNumber;
 
-    @Column(name = "account")
+    @Column(name = "account", nullable = false, updatable = false)
     private long account;
 
-    @Column(name = "security_code")
+    @Column(name = "security_code", nullable = false, updatable = false)
     private int securityCode;
 
-    @Column(name = "pin")
+    @Column(name = "pin", nullable = false)
     private int pin;
 
-    @Column(name = "expiration_date")
+    @Column(name = "expiration_date", nullable = false, updatable = false)
     private LocalDateTime expirationDate;
 
     public BankCard() {

@@ -1,10 +1,13 @@
 package com.barabank.dao;
 
+import com.barabank.beans.Customer;
+import com.barabank.beans.Person;
 import com.barabank.beans.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -12,26 +15,47 @@ public class hello {
     public static void main(String[] args) {
         ApplicationContext context = new GenericXmlApplicationContext("application-context.xml");
         BankDao bankDao = context.getBean("barabankDao", BankDao.class);
-        Transaction transaction = new Transaction();
+        //Transaction transaction = new Transaction();
 
-        transaction.setFromAccount(663636L);
-        transaction.setToAccount(2313L);
+//        transaction.setFromAccount(663636L);
+//        transaction.setToAccount(2313L);
+//
+//        BigDecimal bigDecimal = BigDecimal.valueOf(23632L);
+//        transaction.setSum(bigDecimal);
+//        transaction.setDate(OffsetDateTime.now());
+//
+//        System.out.println(transaction.toString());
+//
+//
+//        bankDao.saveTransaction(transaction);
+//
+//        List<Transaction> list = bankDao.findAllSentAccountTransactions(2323L);
+//
+//        for (Transaction transaction1:list) {
+//            System.out.println(transaction1.toString());
+//        }
 
-        BigDecimal bigDecimal = BigDecimal.valueOf(23632L);
-        transaction.setSum(bigDecimal);
-        transaction.setDate(OffsetDateTime.now());
 
-        System.out.println(transaction.toString());
+        Person person = new Person();
+        person.setFirstName("Ilya");
+        person.setMiddleName("Dmitrievich");
+        person.setLastName("Mikheev");
+        person.setAddress("Reutov, Pobedy 2-46");
+        person.setId(123456789L);
+        person.setPhone(79999999999L);
+        person.setBirthDate(LocalDate.of(1995, 8,2 ));
 
+        Customer customer = new Customer();
 
-        bankDao.saveTransaction(transaction);
+        customer.setId(person.getPhone());
 
-        List<Transaction> list = bankDao.findAllSentAccountTransactions(2323L);
+        customer.setPassword("1Mikheypop");
 
-        for (Transaction transaction1:list) {
-            System.out.println(transaction1.toString());
-        }
+        person.setCustomer(customer);
 
+        //bankDao.saveCustomer(customer);
+
+        bankDao.savePerson(person);
 
 
     }

@@ -17,15 +17,16 @@ import java.math.BigDecimal;
 public class Account implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_number_generator")
+    @SequenceGenerator(name = "account_number_generator", sequenceName = "account_number_sequence")
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
     @ManyToOne()
-    @JoinColumn(name = "customer")
+    @JoinColumn(name = "customer", nullable = false)
     private Customer customer;
 
-    @Column(name = "balance")
+    @Column(name = "balance", nullable = false)
     private BigDecimal sum;
 
     public Account() {
