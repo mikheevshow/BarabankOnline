@@ -48,6 +48,6 @@
 
     <bean id="service" class="com.barabank.service.logic.BankService"/>
 
-    <!--<bean id="barabankTransactionReportService" class="com.barabank.service.logic.BarabankTransactionReportService"/>-->
+    <bean id="barabankTransactionReportService" class="com.barabank.service.logic.BarabankTransactionReportService"/>
 
 </beans>
