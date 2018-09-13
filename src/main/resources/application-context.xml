@@ -52,5 +52,6 @@
     <bean id="barabankCardOperationService" class="com.barabank.service.logic.BarabankCardOperationService"/>
     <bean id="barabankUserService" class="com.barabank.service.logic.BarabankUserService"/>
     <bean id="barabankAccountService" class="com.barabank.service.logic.BarabankAccountService"/>
+    <bean id="barabankRestService" class="com.barabank.service.logic.BarabankRestService"/>
 
 </beans>
