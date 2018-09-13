@@ -8,13 +8,13 @@ import java.time.Period;
 
 public interface TransactionReportService {
 
-    public String getBankTransactionsForPeriod(Period period, TransactionReportType transactionReportType);
+    public String getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType);
     public String getBankTransactionsForDay(LocalDate date, TransactionReportType transactionReportType);
 
-    public String getTransactionsForCustomerInPeriod(Customer customer, Period period, TransactionReportType transactionReportType);
+    public String getTransactionsForCustomerInPeriod(Customer customer, LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType);
     public String getTransactionsForCustomerInDate(Customer customer, LocalDate date, TransactionReportType transactionReportType);
 
-    public String getTransactionsForAccountInPeriod(long account, LocalDateTime startTime, LocalDateTime endTime, TransactionReportType transactionReportType);
-    public String getTransactionsForAccountInDate(long account, LocalDateTime date, TransactionReportType transactionReportType);
+    public String getTransactionsForAccountInPeriod(long account, LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType);
+    public String getTransactionsForAccountInDate(long account, LocalDate date, TransactionReportType transactionReportType);
 
 }

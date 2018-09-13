@@ -195,7 +195,9 @@ public class BarabankDao implements BankDao {
 
 
 
-
+    public List<Transaction> findAllTransactions() {
+        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t").list();
+    }
 
     /**
      * Метод, позволяющий получить список транзакций в которых участвует передаваемый банковский счет

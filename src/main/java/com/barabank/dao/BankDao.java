@@ -38,6 +38,7 @@ public interface BankDao {
     public Account findAccountByCardNumber(long card_number);
 
 
+    public List<Transaction> findAllTransactions();
     public List<Transaction> findAllTransactionsForAccount(long account_id);
     public List<Transaction> findAllSentAccountTransactions(long account_id);
     public List<Transaction> findAllReceivedAccountTransactions(long account_id);
