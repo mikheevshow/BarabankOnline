@@ -3,31 +3,46 @@ package com.barabank.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @author Ilya Mikheev
- *
+ * @author Leonid Zemenkov
  */
 
 @Entity
 @Table(name = "person")
 public class Person implements Serializable {
 
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+
+    @Column(name = "middle_name", nullable = false)
     private String middleName;
+
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+
+    @Column(name = "phone", nullable = false, unique = true)
     private long phone;
+
+    @Id
+    @Column(name = "id",nullable = false, unique = true)
     private long id;
+
+    @Column(name = "address", nullable = false)
     private String  address;
-    private Date birthDate;
+
+    @Column(name = "birth_date", nullable = false)
+    private LocalDate birthDate;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    private Customer customer;
 
     public Person() {
 
     }
 
-    @Column(name = "first_name")
     public String getFirstName() {
         return firstName;
     }
@@ -36,7 +51,6 @@ public class Person implements Serializable {
         this.firstName = firstName;
     }
 
-    @Column(name = "middle_name")
     public String getMiddleName() {
         return middleName;
     }
@@ -45,7 +59,6 @@ public class Person implements Serializable {
         this.middleName = middleName;
     }
 
-    @Column(name = "last_name")
     public String getLastName() {
         return lastName;
     }
@@ -54,7 +67,6 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    @Column(name = "phone")
     public long getPhone() {
         return phone;
     }
@@ -63,8 +75,6 @@ public class Person implements Serializable {
         this.phone = phone;
     }
 
-    @Id
-    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -73,7 +83,6 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -82,13 +91,11 @@ public class Person implements Serializable {
         this.address = address;
     }
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "birth_date")
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -104,6 +111,5 @@ public class Person implements Serializable {
                 ", birthDate=" + birthDate +
                 '}';
     }
-
 }
 

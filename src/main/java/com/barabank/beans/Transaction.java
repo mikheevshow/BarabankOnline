@@ -1,36 +1,43 @@
 package com.barabank.beans;
 
 
-import org.joda.time.LocalDate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 /**
  * @author Ilya Mikheev
- *
+ * @author Leonid Zemenkov
  */
 
 @Entity
 @Table(name = "transaction")
 public class Transaction implements Serializable {
 
+    @Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "transaction_id_generator")
+    //@SequenceGenerator(name = "transaction_id_generator", sequenceName = "transaction_id_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
     private long id;
+
+    @Column(name = "from_account", nullable = false, updatable = false)
     private long fromAccount;
+
+    @Column(name = "to_account", nullable = false, updatable = false)
     private long toAccount;
+
+    @Column(name = "sum", nullable = false, updatable = false)
     private BigDecimal sum;
-    private LocalDate date;
+
+    @Column(name = "date", nullable = false, updatable = false)
+    private OffsetDateTime date;
 
     public Transaction() {
-
+        this.setDate(OffsetDateTime.now());
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -39,7 +46,6 @@ public class Transaction implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "from_account")
     public long getFromAccount() {
         return fromAccount;
     }
@@ -48,7 +54,6 @@ public class Transaction implements Serializable {
         this.fromAccount = fromAccount;
     }
 
-    @Column(name = "to_account")
     public long getToAccount() {
         return toAccount;
     }
@@ -57,7 +62,6 @@ public class Transaction implements Serializable {
         this.toAccount = toAccount;
     }
 
-    @Column(name = "sum")
     public BigDecimal getSum() {
         return sum;
     }
@@ -66,13 +70,22 @@ public class Transaction implements Serializable {
         this.sum = sum;
     }
 
-//    @Temporal(value = TemporalType.TIMESTAMP)
-//    @Column(name = "date")
-//    public Date getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(Date date) {
-//        this.date = date;
-//    }
+    public OffsetDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(OffsetDateTime date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", fromAccount=" + fromAccount +
+                ", toAccount=" + toAccount +
+                ", sum=" + sum +
+                ", date=" + date +
+                '}';
+    }
 }

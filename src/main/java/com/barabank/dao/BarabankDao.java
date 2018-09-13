@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author Ilya Mikheev
- *
+ * @author Leonid Zemenkov
  */
 
 @Transactional(readOnly = true)
@@ -50,9 +50,8 @@ public class BarabankDao implements BankDao {
     }
 
     @Transactional(readOnly = false)
-    public Person savePerson(Person person) {
+    public void savePerson(Person person) {
         getSessionFactory().getCurrentSession().save(person);
-        return person;
     }
 
     public List<Customer> findAllCustomers() {
@@ -74,9 +73,8 @@ public class BarabankDao implements BankDao {
     }
 
     @Transactional(readOnly = false)
-    public Customer saveCustomer(Customer customer) {
+    public void saveCustomer(Customer customer) {
         getSessionFactory().getCurrentSession().save(customer);
-        return customer;
     }
 
     public List<Account> findAllAccountsForCustomer(Customer customer) {
@@ -100,9 +98,8 @@ public class BarabankDao implements BankDao {
     }
 
     @Transactional(readOnly = false)
-    public Account updateAccount(Account account) {
+    public void updateAccount(Account account) {
         getSessionFactory().getCurrentSession().update(account);
-        return account;
     }
 
     @Transactional(readOnly = false)
@@ -131,23 +128,46 @@ public class BarabankDao implements BankDao {
         return findAccountByAccountId(account_number);
     }
 
+
+
+    /**
+     * Метод, позволяющий получить список транзакций в которых участвует передаваемый банковский счет
+     * @param account_id - номер банковского счета
+     * @return список транзакций
+     */
+    @Transactional(readOnly = true)
     public List<Transaction> findAllTransactionsForAccount(long account_id) {
         return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.fromAccount = :account_id OR t.toAccount = :account_id ").setParameter("account_id", account_id).list();
     }
 
+    /**
+     * Метод, позволяющий получить список транзакций, в которых передаваемый банковский счет выступает в качестве отправителя средств
+     * @param account_id - номер банковского счета
+     * @return список транзакций
+     */
+    @Transactional(readOnly = true)
     public List<Transaction> findAllSentAccountTransactions(long account_id) {
         return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.fromAccount = :account_id").setParameter("account_id", account_id).list();
     }
 
+    /**
+     * Метод, позволяющий получить список транзакций, в которых передаваемый банковский счет выступает в получателя средств
+     * @param account_id - номер банковского счета
+     * @return список транзакций
+     */
+    @Transactional(readOnly = true)
     public List<Transaction> findAllReceivedAccountTransactions(long account_id) {
 
         return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.toAccount = :account_id").setParameter("account_id", account_id).list();
     }
 
+    /**
+     * Метод, сохраняющий транзакцию в базу данных
+     * @param transaction - транзакция
+     */
     @Transactional(readOnly = false)
-    public Transaction saveTransaction(Transaction transaction) {
+    public void saveTransaction(Transaction transaction) {
         getSessionFactory().getCurrentSession().save(transaction);
-        return transaction;
     }
 
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <!--Подключаем файл свойств-->
+    <context:property-placeholder location="classpath:config.properties"/>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+
+    <!--Подключаем фабрику сессий-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+          p:dataSource-ref="dataSource"
+          p:packagesToScan="com.barabank.beans"
+          p:hibernateProperties-ref="hibernateProperties"
+    />
+
+    <util:properties id="hibernateProperties">
+        <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+        <prop key="hibernate.max_fetch_depth">3</prop>
+        <prop key="hibernate.show_sql">true</prop>
+    </util:properties>
+
+    <context:component-scan base-package="com.barabank.beans"/>
+
+    <!--Подключаем менеджер транзакций-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"
+        p:sessionFactory-ref="sessionFactory"/>
+
+
+    <!--Устанавливает использование аннотаций для транзакций и свойства прокси-->
+    <tx:annotation-driven proxy-target-class="true"/>
+
+
+    <!--Подключаем объект доступа к данным -->
+    <bean id="barabankDao" class="com.barabank.dao.BarabankDao"/>
+
+    <bean id="service" class="com.barabank.service.logic.BankService"/>
+
+    <!--<bean id="barabankTransactionReportService" class="com.barabank.service.logic.BarabankTransactionReportService"/>-->
+
+</beans>

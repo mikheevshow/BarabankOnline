@@ -2,30 +2,38 @@ package com.barabank.beans;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.sql.Date;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /**
  * @author Ilya Mikheev
- *
+ * @author Leonid Zemenkov
  */
 
 @Entity
 @Table(name = "bank_card")
 public class BankCard implements Serializable {
 
+    @Id
+    @Column(name = "card_number")
     private long cardNumber;
+
+    @Column(name = "account")
     private long account;
+
+    @Column(name = "security_code")
     private int securityCode;
+
+    @Column(name = "pin")
     private int pin;
-    private Date expirationDate;
+
+    @Column(name = "expiration_date")
+    private LocalDateTime expirationDate;
 
     public BankCard() {
 
     }
 
-    @Id
-    @Column(name = "card_number")
     public long getCardNumber() {
         return cardNumber;
     }
@@ -34,7 +42,6 @@ public class BankCard implements Serializable {
         this.cardNumber = cardNumber;
     }
 
-    @Column(name = "account")
     public long getAccount() {
         return account;
     }
@@ -43,7 +50,6 @@ public class BankCard implements Serializable {
         this.account = account;
     }
 
-    @Column(name = "security_code")
     public int getSecurityCode() {
         return securityCode;
     }
@@ -52,7 +58,6 @@ public class BankCard implements Serializable {
         this.securityCode = securityCode;
     }
 
-    @Column(name = "pin")
     public int getPin() {
         return pin;
     }
@@ -61,12 +66,11 @@ public class BankCard implements Serializable {
         this.pin = pin;
     }
 
-    @Column(name = "expiration_date")
-    public Date getExpirationDate() {
+    public LocalDateTime getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
 

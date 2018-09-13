@@ -6,29 +6,32 @@ import org.hibernate.annotations.Generated;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.List;
 
 /**
  * @author Ilya Mikheev
- *
+ * @author Leonid Zemenkov
  */
 
 @Entity
 @Table(name = "account")
 public class Account implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private long id;
+
+    @ManyToOne()
+    @JoinColumn(name = "customer")
     private Customer customer;
+
+    @Column(name = "balance")
     private BigDecimal sum;
 
     public Account() {
 
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -37,8 +40,6 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-   @ManyToOne
-   @JoinColumn(name = "customer")
     public Customer getCustomer() {
         return customer;
     }
@@ -47,7 +48,6 @@ public class Account implements Serializable {
         this.customer = customer;
     }
 
-    @Column(name = "balance")
     public BigDecimal getSum() {
         return sum;
     }

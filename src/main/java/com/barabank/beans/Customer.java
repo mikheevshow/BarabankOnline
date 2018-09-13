@@ -2,29 +2,40 @@ package com.barabank.beans;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.util.*;
 
 /**
  * @author Ilya Mikheev
- *
+ * @author Leonid Zemenkov
  */
 
 @Entity
 @Table(name = "customer")
 public class Customer implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_generator")
+    @SequenceGenerator(name = "customer_id_generator", sequenceName = "customer_id_sequence")
+    @Column(name = "id", nullable = false, unique = true)
     private long id;
+
+    @Column(name = "phone", nullable = false, unique = true, updatable = false, insertable = false)
     private long phone;
+
+    @Column(name = "password",nullable = false)
     private String password;
-   // private List<Account> accounts = new ArrayList<Account>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+    private List<Account> accounts = new ArrayList<Account>();
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "phone", referencedColumnName = "phone")
+    private Person person;
 
     public Customer() {
 
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     public long getId() {
         return id;
     }
@@ -33,7 +44,6 @@ public class Customer implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "phone")
     public long getPhone() {
         return phone;
     }
@@ -42,7 +52,6 @@ public class Customer implements Serializable {
         this.phone = phone;
     }
 
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -51,24 +60,22 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-//   // @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//   // public List<Account> getAccounts() {
-//        return accounts;
-//    }
+    public List<Account> getAccounts() {
+        return accounts;
+    }
 
-//    public void setAccounts(List<Account> accounts) {
-//        this.accounts = accounts;
-//    }
-//
-//    public void addAccount(Account account) {
-//        account.setCustomer(this);
-//        getAccounts().add(account);
-//
-//    }
-//
-//    public void removeAccount(Account account) {
-//        getAccounts().remove(account);
-//    }
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public void addAccount(Account account) {
+        account.setCustomer(this);
+        getAccounts().add(account);
+    }
+
+    public void removeAccount(Account account) {
+        getAccounts().remove(account);
+    }
 
     @Override
     public String toString() {
