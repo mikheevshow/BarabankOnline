@@ -3,8 +3,6 @@ package com.barabank.mvc.site;
 
 import com.barabank.beans.Customer;
 import com.barabank.beans.Person;
-import com.barabank.service.logic.OnlineBankInterface;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 @Controller
 

@@ -12,7 +12,9 @@ public interface BankTransactionService {
     public void transferMoney(long fromAccount, long toAccount, BigDecimal sum) throws InsufficientFundsException;
 
     public void addTransaction(Transaction transaction);
-    //public List<Transaction> getTransactionListForAccount(long account);
 
+    public void withdrawalFromAccount(long account, BigDecimal sum) throws InsufficientFundsException;
+
+    public void refillAccount(long account, BigDecimal sum);
 
 }

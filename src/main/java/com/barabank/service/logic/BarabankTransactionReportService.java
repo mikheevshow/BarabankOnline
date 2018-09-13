@@ -19,7 +19,7 @@ import java.util.List;
  */
 
 @Service
-public class BarabankTransactionReportService implements TransactionReportService {
+public class BarabankTransactionReportService implements BankTransactionReportService {
 
     private BankDao bankDao;
 

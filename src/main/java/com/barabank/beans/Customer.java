@@ -19,7 +19,7 @@ public class Customer implements Serializable {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @Column(name = "phone", nullable = false, unique = true, updatable = false)
+    @Column(name = "phone", nullable = false, unique = true, updatable = false,insertable = false)
     private long phone;
 
     @Column(name = "password",nullable = false)

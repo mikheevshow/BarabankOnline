@@ -1,5 +1,5 @@
 package com.barabank.service.logic;
 
-public class BankRestService implements RestService {
+public interface BankRestService {
 
 }

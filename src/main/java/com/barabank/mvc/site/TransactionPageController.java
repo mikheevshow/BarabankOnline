@@ -2,7 +2,7 @@ package com.barabank.mvc.site;
 
 
 import com.barabank.beans.Customer;
-import com.barabank.service.logic.TransactionReportService;
+import com.barabank.service.logic.BankTransactionReportService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class TransactionPageController {
 
     @Resource
-    private TransactionReportService transactionReportService;
+    private BankTransactionReportService transactionReportService;
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView returnJsonTransactionString(Model model, HttpServletRequest request) {

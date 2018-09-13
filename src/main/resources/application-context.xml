@@ -46,8 +46,12 @@
     <!--Подключаем объект доступа к данным -->
     <bean id="barabankDao" class="com.barabank.dao.BarabankDao"/>
 
-    <bean id="service" class="com.barabank.service.logic.BankService"/>
+    <bean id="service" class="com.barabank.service.logic.BarabankService"/>
 
     <bean id="barabankTransactionReportService" class="com.barabank.service.logic.BarabankTransactionReportService"/>
+    <bean id="barabankTransactionServive" class="com.barabank.service.logic.BarabankTransactionService"/>
+    <bean id="barabankCardOperationService" class="com.barabank.service.logic.BarabankCardOperationService"/>
+    <bean id="barabankUserService" class="com.barabank.service.logic.BarabankUserService"/>
+    <bean id="barabankAccountService" class="com.barabank.service.logic.BarabankAccountService"/>
 
 </beans>

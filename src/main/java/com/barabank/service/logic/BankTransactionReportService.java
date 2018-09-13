@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 
-public interface TransactionReportService {
+public interface BankTransactionReportService {
 
     public String getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType);
     public String getBankTransactionsForDay(LocalDate date, TransactionReportType transactionReportType);
