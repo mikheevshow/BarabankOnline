@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
+/**
+ * @author Ilya Mikheev
+ * @author Leonid Zemenkov
+ */
+
 public class BarabankTransactionService implements BankTransactionService {
 
     private BankDao bankDao;

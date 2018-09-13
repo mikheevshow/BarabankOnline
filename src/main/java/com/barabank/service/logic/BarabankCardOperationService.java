@@ -7,6 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
+/**
+ * @author Ilya Mikheev
+ * @author Leonid Zemenkov
+ */
+
 public class BarabankCardOperationService implements BankCardOperationService {
 
     private BankTransactionService bankTransactionService;

@@ -1,11 +1,8 @@
 package com.barabank.service.logic;
 
-//import com.barabank.beans.Transaction;
 import com.barabank.beans.Transaction;
 import com.barabank.service.exceptions.*;
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 public interface BankTransactionService {
 

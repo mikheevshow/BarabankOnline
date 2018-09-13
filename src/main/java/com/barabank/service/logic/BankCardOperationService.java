@@ -1,10 +1,7 @@
 package com.barabank.service.logic;
 
 import com.barabank.service.exceptions.InsufficientFundsException;
-
 import java.math.BigDecimal;
-import java.math.BigInteger;
-
 
 public interface BankCardOperationService {
 

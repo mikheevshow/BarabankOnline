@@ -1,8 +1,5 @@
 package com.barabank.beans;
 
-
-import org.hibernate.annotations.Generated;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;

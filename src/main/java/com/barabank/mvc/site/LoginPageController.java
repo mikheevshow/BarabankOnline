@@ -3,7 +3,7 @@ package com.barabank.mvc.site;
 import com.barabank.beans.Customer;
 import com.barabank.beans.Person;
 import com.barabank.service.exceptions.UserNotExistException;
-import com.barabank.service.logic.*;
+import com.barabank.service.logic.BankUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginPageController {
 
    @Resource
-   private OnlineBankInterface service;
+   private BankUserService service;
 
     @RequestMapping(method = RequestMethod.GET)
     public String loginPage(Model model) {

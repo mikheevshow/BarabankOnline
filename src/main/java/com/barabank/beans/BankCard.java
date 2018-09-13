@@ -1,7 +1,6 @@
 package com.barabank.beans;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 

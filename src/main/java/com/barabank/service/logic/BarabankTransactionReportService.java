@@ -39,7 +39,6 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      * @param transactionReportType - формат данных
      * @return строка Json или XML
      */
-
     public String getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType) {
         List<Transaction> bankTransactions = getBankDao().findAllTransactions();
         for (Transaction transaction: bankTransactions) {
@@ -65,7 +64,6 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
         }
         return JsonXmlParser(bankTransactions, transactionReportType);
     }
-
 
     /**
      * Метод получения списка банковских транзакций за некоторый период
