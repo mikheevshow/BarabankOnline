@@ -3,6 +3,7 @@ package com.barabank.mvc.site;
 
 import com.barabank.beans.Customer;
 import com.barabank.beans.Person;
+import com.barabank.service.logic.BankUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -17,7 +18,7 @@ import javax.annotation.Resource;
 public class RegistrationPageController {
 
     @Resource
-    private OnlineBankInterface service;
+    private BankUserService bankUserService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String indexPage(Model model) {
@@ -43,8 +44,10 @@ public class RegistrationPageController {
         customer.setPassword(formData.getFirst("password"));
 
 
-        service.addPerson(person);
-        service.addCustomer(customer);
+
+
+        bankUserService.addPerson(person);
+        bankUserService.addCustomer(customer);
 
     }
 

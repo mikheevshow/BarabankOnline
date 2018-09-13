@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.*;
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/webbanking")
 public class RestController {
-//
-//    @Resource
-//    private static final BankService service;
+
 //
 //    @RequestMapping(value = "/{bank_id}/{user_id}/{account_number}/{sum}/{req}", method = RequestMethod.GET)
 //    @ResponseBody

@@ -31,6 +31,13 @@ public class BarabankCardOperationService implements BankCardOperationService {
         this.bankTransactionService = bankTransactionService;
     }
 
+    /**
+     *
+     * @param fromCard - номер карты отправителя средств
+     * @param toCard - номер карты получателя средств
+     * @param sum - переводимая сумма
+     * @throws InsufficientFundsException - исключение, создаваемое при нехватке средств на счете
+     */
     @Transactional
     @Override
     public void transferMoneyWithCards(long fromCard, long toCard, BigDecimal sum) throws InsufficientFundsException {
@@ -42,18 +49,5 @@ public class BarabankCardOperationService implements BankCardOperationService {
         } catch (InsufficientFundsException ex) {
             throw new InsufficientFundsException(ex.getMessage());
         }
-    }
-
-    private void withdrawalFromCard(long cardNumber, BigDecimal sum) throws InsufficientFundsException {
-        long acc = getBankDao().findAccountByCardNumber(cardNumber).getId();
-        try {
-            getBankTransactionService().withdrawalFromAccount(acc,sum);
-        } catch (InsufficientFundsException ex) {
-            throw new InsufficientFundsException(ex.getMessage());
-        }
-    }
-
-    private void refillCard(long cardNumber, BigDecimal sum) {
-        getBankTransactionService().refillAccount(getBankDao().findAccountByCardNumber(cardNumber).getId(), sum);
     }
 }

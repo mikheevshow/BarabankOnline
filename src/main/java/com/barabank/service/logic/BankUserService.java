@@ -12,8 +12,8 @@ public interface BankUserService {
 
     public Person findPersonByPhone(long phone) throws UserNotExistException;
 
-    public void addPerson(Person person) throws UserNotExistException;
+    public void addPerson(Person person);
 
-    public void addCustomer(Customer customer) throws UserNotExistException;
+    public void addCustomer(Customer customer);
 
 }
