@@ -1,11 +1,15 @@
 package com.barabank.service.logic;
 
 import com.barabank.beans.Account;
+import com.barabank.beans.BankCard;
 import com.barabank.beans.Customer;
 import com.barabank.dao.BankDao;
+import com.barabank.service.enums.BankCardPaymentSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * @author Ilya Mikheev
@@ -16,7 +20,7 @@ public class BarabankAccountService implements BankAccountService {
 
     private BankDao bankDao;
 
-    public BankDao getBankDao() {
+    private BankDao getBankDao() {
         return bankDao;
     }
 
@@ -27,23 +31,28 @@ public class BarabankAccountService implements BankAccountService {
 
     /**
      * Открывает новый счет для клиента банка
-     * @param forCustomer - клиент банка
-     * @param createCard - создать или не создать карту при открытии счёта
+     * @param customer - клиент банка
      * @return созданный объект Account c информацией, записанной в базу данных
      */
     @Override
-    public Account openBankAccount(Customer forCustomer, boolean createCard) {
-        //Нужно реализовать
-        return null;
+    public Account openBankAccountFor(Customer customer) {
+        return getBankDao().addAccountForCustomer(customer);
     }
 
     /**
      * Добавляет карту к счёту в банке
      * @param accountNumber - номер счёта
+     * @param bankCardPaymentSystem - тип платежной системы, которая поддерживается картой
      */
     @Override
-    public void addCardToAccount(long accountNumber) {
-        //Нужно реализовать
+    public void addCardToAccount(long accountNumber, BankCardPaymentSystem bankCardPaymentSystem) {
+        Account account = bankDao.findAccountByAccountId(accountNumber);
+        BankCard bankCard = new BankCard();
+        bankCard.setPaymentSystem(bankCardPaymentSystem);
+        Collection<BankCard> bankCardCollection = new HashSet<>();
+        bankCardCollection.add(bankCard);
+        account.addBankCards(bankCardCollection);
+        getBankDao().updateAccount(account);
     }
 
     /**
@@ -53,8 +62,7 @@ public class BarabankAccountService implements BankAccountService {
      */
     @Override
     public BigDecimal getBalanceWithAccountId(long accountNumber) {
-        //Нужно реализовать
-        return null;
+        return getBankDao().findAccountByAccountId(accountNumber).getBalance();
     }
 
     /**
@@ -64,7 +72,6 @@ public class BarabankAccountService implements BankAccountService {
      */
     @Override
     public BigDecimal getBalanceWithCardNumber(long cardNumber) {
-        //Нужно реализовать
-        return null;
+        return getBankDao().findAccountByCardNumber(cardNumber).getBalance();
     }
 }

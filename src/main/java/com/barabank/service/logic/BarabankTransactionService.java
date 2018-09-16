@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 /**
  * @author Ilya Mikheev
@@ -48,7 +48,7 @@ public class BarabankTransactionService implements BankTransactionService {
         transaction.setFromAccount(fromAccount);
         transaction.setToAccount(toAccount);
         transaction.setSum(sum);
-        transaction.setDate(LocalDateTime.now());
+        transaction.setDate(OffsetDateTime.now());
         addTransaction(transaction);
     }
 
@@ -70,7 +70,7 @@ public class BarabankTransactionService implements BankTransactionService {
     @Transactional
     @Override
     public void withdrawalFromAccount(long account, BigDecimal sum) throws InsufficientFundsException {
-        Account acc = getBankDao().findAccountById(account);
+        Account acc = getBankDao().findAccountByAccountId(account);
         if (acc.getBalance().compareTo(sum) >= 0) {
             acc.setBalance(acc.getBalance().subtract(sum));
             getBankDao().updateAccount(acc);
@@ -86,7 +86,7 @@ public class BarabankTransactionService implements BankTransactionService {
      */
     @Override
     public void refillAccount(long account, BigDecimal sum) {
-        Account acc = getBankDao().findAccountById(account);
+        Account acc = getBankDao().findAccountByAccountId(account);
         acc.setBalance(acc.getBalance().add(sum));
         getBankDao().updateAccount(acc);
     }

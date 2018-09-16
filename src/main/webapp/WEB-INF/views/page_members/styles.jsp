@@ -12,4 +12,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header.css"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/footer.css"/>
 
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/money-transaction.css"/>
+
+
 
