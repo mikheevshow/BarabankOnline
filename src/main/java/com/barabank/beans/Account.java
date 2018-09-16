@@ -3,9 +3,7 @@ package com.barabank.beans;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Ilya Mikheev
@@ -35,7 +33,7 @@ public class Account implements Serializable {
     private Customer customer;
 
     @OneToMany(mappedBy = "account")
-    private Set<BankCard> bankCardSet = new HashSet<>();
+    private List<BankCard> bankCardSet = new ArrayList<>();
 
 
 
