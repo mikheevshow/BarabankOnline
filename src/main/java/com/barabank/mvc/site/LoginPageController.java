@@ -40,7 +40,7 @@ public class LoginPageController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String authentication(@RequestBody MultiValueMap<String, String> formData, HttpServletRequest request) {
-        if((formData.getFirst("phone").trim().length()==0 || formData.getFirst("password").trim().length()==0)) {
+        if((formData.getFirst("phone").trim().length()!=0 && formData.getFirst("password").trim().length()!=0)) {
             long phone = Long.parseLong(formData.getFirst("telephone"));
             Customer customer;
             Person person;
