@@ -37,11 +37,12 @@ public class BarabankCardOperationService implements BankCardOperationService {
     }
 
     /**
-     *
+     * Метод, позволяюзий осуществлять перевод меджду счетами по номеру карт, которые привязаны к счетам
      * @param fromCard - номер карты отправителя средств
      * @param toCard - номер карты получателя средств
      * @param sum - переводимая сумма
-     * @throws InsufficientFundsException - исключение, создаваемое при нехватке средств на счете
+     * @throws InsufficientFundsException - исключение, создаваемое при нехватке средств на счете,
+     * в сообщени исключения указано количество, недостающее для проведения операции
      */
     @Transactional
     @Override

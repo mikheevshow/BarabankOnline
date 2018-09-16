@@ -71,11 +71,11 @@ public class BarabankTransactionService implements BankTransactionService {
     @Override
     public void withdrawalFromAccount(long account, BigDecimal sum) throws InsufficientFundsException {
         Account acc = getBankDao().findAccountByAccountId(account);
-        if (acc.getSum().compareTo(sum) >= 0) {
-            acc.setSum(acc.getSum().subtract(sum));
+        if (acc.getBalance().compareTo(sum) >= 0) {
+            acc.setBalance(acc.getBalance().subtract(sum));
             getBankDao().updateAccount(acc);
         } else {
-            throw new InsufficientFundsException("Для перевода не хватает" + acc.getSum().subtract(sum));
+            throw new InsufficientFundsException("Для перевода не хватает" + acc.getBalance().subtract(sum));
         }
     }
 
@@ -87,7 +87,7 @@ public class BarabankTransactionService implements BankTransactionService {
     @Override
     public void refillAccount(long account, BigDecimal sum) {
         Account acc = getBankDao().findAccountByAccountId(account);
-        acc.setSum(acc.getSum().add(sum));
+        acc.setBalance(acc.getBalance().add(sum));
         getBankDao().updateAccount(acc);
     }
 }

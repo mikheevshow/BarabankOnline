@@ -72,22 +72,13 @@ public class BarabankUserService implements BankUserService {
         }
     }
 
-
     /**
-     * Вносит набор персональных данных в базу
-     * @param person - клиент банка
+     * Метод, создающий нового пользователя в системе
+     * @param customer
+     * @param person
      */
     @Override
-    public void addPerson(Person person) {
-        //Нужно реализовать
-    }
-
-    /**
-     * Вносит набор идентификационных данных в базу
-     * @param customer - клиент банка
-     */
-    @Override
-    public void addCustomer(Customer customer) {
-        //Нужно реализовать
+    public void addNewUser(Customer customer, Person person) {
+        getBankDao().createUser(customer, person);
     }
 }

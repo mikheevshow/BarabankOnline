@@ -1,9 +1,7 @@
 package com.barabank.dao;
 
 import com.barabank.beans.*;
-import com.barabank.service.logic.TransactionReportType;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,10 +25,15 @@ public interface BankDao {
     public Customer updateCustomer(Customer customer);
     public void saveCustomer(Customer customer);
 
+    public void createUser(Customer customer, Person person);
+
     public List<Account> findAllAccountsForCustomer(Customer user);
     public List<Account> findAllAccountWithCustomerPhone(long phone);
+
     public Account findAccountByAccountId(long account_id);
-    public void addAccountForCustomer(Customer customer);
+
+    public Account addAccountForCustomer(Customer customer);
+
     public void updateAccount(Account account);
     public Account saveAccount(Account account);
 

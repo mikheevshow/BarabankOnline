@@ -1,17 +1,11 @@
 package com.barabank.dao;
 
-import com.barabank.beans.Customer;
-import com.barabank.beans.Person;
-import com.barabank.beans.Transaction;
+import com.barabank.service.enums.TransactionReportType;
 import com.barabank.service.logic.BarabankTransactionReportService;
-import com.barabank.service.logic.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.List;
 
 public class hello {
     public static void main(String[] args) {

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -30,16 +31,10 @@ public class BarabankDao implements BankDao {
     }
 
 
+    @Override
+    public void createUser(Customer customer, Person person) {
 
-
-
-
-
-
-
-
-
-
+    }
 
     public List<Person> findAllPersons() {
         return getSessionFactory().getCurrentSession().createQuery("FROM Person p").list();
@@ -142,9 +137,10 @@ public class BarabankDao implements BankDao {
     }
 
     @Transactional(readOnly = false)
-    public void addAccountForCustomer(Customer customer) {
+    public Account addAccountForCustomer(Customer customer) {
 
         //getSessionFactory().getCurrentSession().createQuery("INSERT INTO Account(id, customer, sum) SELECT customer FROM Customer c");
+        return null;
     }
 
     @Transactional(readOnly = false)
@@ -240,4 +236,33 @@ public class BarabankDao implements BankDao {
     }
 
 
+    @Override
+    public List<Transaction> getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate) {
+        return null;
+    }
+
+    @Override
+    public List<Transaction> getBankTransactionsForDay(LocalDate date) {
+        return null;
+    }
+
+    @Override
+    public List<Transaction> getTransactionsForCustomerInPeriod(Customer customer, LocalDate startDate, LocalDate endDate) {
+        return null;
+    }
+
+    @Override
+    public List<Transaction> getTransactionsForCustomerInDate(Customer customer, LocalDate date) {
+        return null;
+    }
+
+    @Override
+    public List<Transaction> getTransactionsForAccountInPeriod(long account, LocalDate startDate, LocalDate endDate) {
+        return null;
+    }
+
+    @Override
+    public List<Transaction> getTransactionsForAccountInDate(long account, LocalDate date) {
+        return null;
+    }
 }

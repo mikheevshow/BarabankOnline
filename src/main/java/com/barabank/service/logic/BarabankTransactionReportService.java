@@ -2,6 +2,7 @@ package com.barabank.service.logic;
 
 import com.barabank.beans.*;
 import com.barabank.dao.BankDao;
+import com.barabank.service.enums.TransactionReportType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -40,12 +40,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      * @return строка Json или XML
      */
     public String getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType) {
-        List<Transaction> bankTransactions = getBankDao().findAllTransactions();
-        for (Transaction transaction: bankTransactions) {
-            if (transaction.getDate().toLocalDate().isAfter(endDate) || transaction.getDate().toLocalDate().isBefore(startDate)) {
-                bankTransactions.remove(transaction);
-            }
-        }
+        List<Transaction> bankTransactions = getBankDao().getBankTransactionsForPeriod(startDate, endDate);
         return JsonXmlParser(bankTransactions, transactionReportType);
     }
 
@@ -56,12 +51,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      * @return строка Json или XML
      */
     public String getBankTransactionsForDay(LocalDate date, TransactionReportType transactionReportType) {
-        List<Transaction> bankTransactions = getBankDao().findAllTransactions();
-        for (Transaction transaction: bankTransactions) {
-            if (transaction.getDate().toLocalDate() == date) {
-                bankTransactions.remove(transaction);
-            }
-        }
+        List<Transaction> bankTransactions = getBankDao().getBankTransactionsForDay(date);
         return JsonXmlParser(bankTransactions, transactionReportType);
     }
 
@@ -76,17 +66,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      */
     public String getTransactionsForCustomerInPeriod(Customer customer, LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType) {
         List<Account> customerAccountList = customer.getAccounts();
-        List<Transaction> customerTransactions = new ArrayList<>();
-        long accountId;
-        for (Account account: customerAccountList) {
-            accountId = account.getId();
-            customerTransactions.addAll(getBankDao().findAllTransactionsForAccount(accountId));
-        }
-        for (Transaction transaction: customerTransactions) {
-            if (transaction.getDate().toLocalDate().isAfter(endDate) || transaction.getDate().toLocalDate().isBefore(startDate)) {
-                customerTransactions.remove(transaction);
-            }
-        }
+        List<Transaction> customerTransactions = getBankDao().getTransactionsForCustomerInPeriod(customer, startDate, endDate);
         return JsonXmlParser(customerAccountList, transactionReportType);
     }
 
@@ -100,17 +80,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      */
     public String getTransactionsForCustomerInDate(Customer customer, LocalDate date, TransactionReportType transactionReportType) {
         List<Account> customerAccountList = customer.getAccounts();
-        List<Transaction> customerTransactions = new ArrayList<>();
-        long accountId;
-        for (Account account: customerAccountList) {
-            accountId = account.getId();
-            customerTransactions.addAll(getBankDao().findAllTransactionsForAccount(accountId));
-        }
-        for (Transaction transaction: customerTransactions) {
-            if (transaction.getDate().toLocalDate() == date) {
-                customerTransactions.remove(transaction);
-            }
-        }
+        List<Transaction> customerTransactions = getBankDao().getTransactionsForCustomerInDate(customer, date);
         return JsonXmlParser(customerTransactions, transactionReportType);
     }
 
@@ -124,12 +94,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      * @return строка Json или XML
      */
     public String getTransactionsForAccountInPeriod(long account, LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType) {
-        List<Transaction> accountTransactions = new ArrayList<>(getBankDao().findAllTransactionsForAccount(account));
-        for (Transaction transaction: accountTransactions) {
-            if (transaction.getDate().toLocalDate().isAfter(endDate) || transaction.getDate().toLocalDate().isBefore(startDate)) {
-                accountTransactions.remove(transaction);
-            }
-        }
+        List<Transaction> accountTransactions = getBankDao().getTransactionsForAccountInPeriod(account, startDate, endDate);
         return JsonXmlParser(accountTransactions, transactionReportType);
     }
 
@@ -142,12 +107,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      * @return строка Json или XML
      */
     public String getTransactionsForAccountInDate(long account, LocalDate date, TransactionReportType transactionReportType) {
-        List<Transaction> accountTransactions = new ArrayList<>(getBankDao().findAllTransactionsForAccount(account));
-        for (Transaction transaction: accountTransactions) {
-            if (transaction.getDate().toLocalDate() == date) {
-                accountTransactions.remove(transaction);
-            }
-        }
+        List<Transaction> accountTransactions = getBankDao().getTransactionsForAccountInDate(account, date);
         return JsonXmlParser(accountTransactions, transactionReportType);
     }
 
@@ -169,11 +129,9 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
                 ex.printStackTrace();
                 return null;
             }
-
-        } else if (transactionReportType == TransactionReportType.XML) {
-            return null;
+//        } else if (transactionReportType == TransactionReportType.XML) {
+//            return null;
         }
-
         return null;
     }
 }
