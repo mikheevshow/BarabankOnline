@@ -7,22 +7,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/webbanking")
 public class RestController {
 
-//
-//    @RequestMapping(value = "/{bank_id}/{user_id}/{account_number}/{sum}/{req}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public void getBankRequest(@PathVariable("bank_id") String bankId, @PathVariable("user_id") long userId, @PathVariable("account_number") long accountNumber, @PathVariable("sum")BigInteger sum, @PathVariable("req") String req) {
-//
-//        if (req.equals("request")) {
-//
-//
-//
-//        } else if (req.equals("accept")) {
-//
-//
-//
-//        } else {
-//
-//        }
-//
+//    @RequestMapping(value = "/{uniq_bank_id}/refill", method = RequestMethod.GET)
+//    public  getFunds() {
+//        return
 //    }
+
 }
