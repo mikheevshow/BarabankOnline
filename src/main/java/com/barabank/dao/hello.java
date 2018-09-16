@@ -49,30 +49,32 @@ public class hello {
 //        bankDao.updatePerson(person);
 //
 //        System.out.println(person.toString());
+//
+//        for (int i=342;i<=351;i++){
+//            for(int j=342;j<=351;j++) {
+//                Transaction transaction = new Transaction();
+//                if(i!=j) {
+//                    transaction.setFromAccount(i);
+//                    transaction.setToAccount(j);
+//                    transaction.setDate(LocalDateTime.now());
+//                    transaction.setSum(BigDecimal.valueOf((long)i+j));
+//                    bankDao.saveTransaction(transaction);
+//                }
+//            }
+//        }
+//
+//
+//        LocalDate today = LocalDate.now().minusDays(1);
+//
+//        List<Transaction> transactions = bankDao.getBankTransactionsForDay(today);
+//
+//
+//        System.out.println("////////////////////////////////////////////////");
+//        for (Transaction transaction : transactions) {
+//            System.out.println(transaction.toString());
+//        }
 
-        for (int i=342;i<=351;i++){
-            for(int j=342;j<=351;j++) {
-                Transaction transaction = new Transaction();
-                if(i!=j) {
-                    transaction.setFromAccount(i);
-                    transaction.setToAccount(j);
-                    transaction.setDate(LocalDateTime.now());
-                    transaction.setSum(BigDecimal.valueOf((long)i+j));
-                    bankDao.saveTransaction(transaction);
-                }
-            }
-        }
 
-
-        LocalDate today = LocalDate.now().minusDays(1);
-
-        List<Transaction> transactions = bankDao.getBankTransactionsForDay(today);
-
-
-        System.out.println("////////////////////////////////////////////////");
-        for (Transaction transaction : transactions) {
-            System.out.println(transaction.toString());
-        }
 
 
 

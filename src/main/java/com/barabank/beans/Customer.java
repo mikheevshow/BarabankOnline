@@ -20,7 +20,7 @@ public class Customer implements Serializable {
     private long customerId;
 
 
-    @Column(name = "phone", nullable = false, unique = true)
+    @Column(name = "phone")
     private long phone;
 
     @Column(name = "password",nullable = false)
@@ -31,7 +31,7 @@ public class Customer implements Serializable {
     private Person person;
 
 
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Account> accounts = new LinkedList<>();
 
     public Customer() {

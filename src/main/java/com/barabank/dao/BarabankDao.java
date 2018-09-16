@@ -1,15 +1,11 @@
 package com.barabank.dao;
 
 import com.barabank.beans.*;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -74,8 +70,7 @@ public class BarabankDao implements BankDao {
 
     @Override
     public Customer findCustomerByPhone(long phone) {
-        return (Customer) entityManager.createQuery("from Customer c where c.phone=:phone").
-                setParameter("phone",phone).getSingleResult();
+        return (Customer) entityManager.createQuery("from Customer c where c.phone="+phone).getSingleResult();
     }
 
     @Override

@@ -36,7 +36,7 @@ public class AccountController {
             modelAndView.setViewName("redirect:/login");
             return modelAndView;
         } else {
-
+            System.out.println("////////////ELSE/////////////");
             Person person = (Person) session.getAttribute("person");
             Customer customer = (Customer) session.getAttribute("customer");
 

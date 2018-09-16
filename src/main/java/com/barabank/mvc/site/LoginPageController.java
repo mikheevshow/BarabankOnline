@@ -41,15 +41,15 @@ public class LoginPageController {
     @RequestMapping(method = RequestMethod.POST)
     public String authentication(@RequestBody MultiValueMap<String, String> formData, HttpServletRequest request) {
         if((formData.getFirst("phone").trim().length()!=0 && formData.getFirst("password").trim().length()!=0)) {
-            long phone = Long.parseLong(formData.getFirst("telephone"));
+            long phone = Long.parseLong(formData.getFirst("phone"));
             Customer customer;
             Person person;
             try {
-                customer = service.findCustomerByPhone(phone);
-                if (customer.getPassword().equals(formData.getFirst("password"))) {
-                    person = service.findPersonByPhone(phone);
-                    request.getSession().setAttribute("customer", customer);
+                person = service.findPersonByPhone(phone);
+                if (person.getCustomer().getPassword().equals(formData.getFirst("password"))) {
+                    request.getSession().setAttribute("customer", person.getCustomer());
                     request.getSession().setAttribute("person", person);
+
                     return "redirect:/account";
                 }
                 return "login";

@@ -12,7 +12,7 @@ import java.util.*;
 
 
 @Entity
-@Table(name = "account")
+@Table(name = "account",schema = "public")
 public class Account implements Serializable {
 
     @SequenceGenerator(name = "account_id_seq",
@@ -67,6 +67,14 @@ public class Account implements Serializable {
 
     public void addBankCards(Collection<? extends BankCard> collection){
         bankCardSet.addAll(collection);
+    }
+
+    public List<BankCard> getBankCardSet() {
+        return bankCardSet;
+    }
+
+    public void setBankCardSet(List<BankCard> bankCardSet) {
+        this.bankCardSet = bankCardSet;
     }
 
     @Override
