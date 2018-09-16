@@ -5,12 +5,14 @@ import com.barabank.beans.Person;
 import com.barabank.dao.BankDao;
 import com.barabank.service.exceptions.UserNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Ilya Mikheev
  * @author Leonid Zemenkov
  */
 
+@Service
 public class BarabankUserService implements BankUserService {
 
     private BankDao bankDao;

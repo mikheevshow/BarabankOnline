@@ -3,6 +3,7 @@ package com.barabank.service.logic;
 import com.barabank.dao.BankDao;
 import com.barabank.service.exceptions.InsufficientFundsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
  * @author Ilya Mikheev
  * @author Leonid Zemenkov
  */
-
+@Service
 public class BarabankCardOperationService implements BankCardOperationService {
 
     private BankTransactionService bankTransactionService;
@@ -49,8 +50,8 @@ public class BarabankCardOperationService implements BankCardOperationService {
     public void transferMoneyWithCards(long fromCard, long toCard, BigDecimal sum) throws InsufficientFundsException {
         long fromAccount, toAccount;
         try {
-            fromAccount = getBankDao().findAccountByCardNumber(fromCard).getId();
-            toAccount = getBankDao().findAccountByCardNumber(toCard).getId();
+            fromAccount = getBankDao().findAccountByCardNumber(fromCard).getAccountId();
+            toAccount = getBankDao().findAccountByCardNumber(toCard).getAccountId();
             getBankTransactionService().transferMoney(fromAccount, toAccount, sum);
         } catch (InsufficientFundsException ex) {
             throw new InsufficientFundsException(ex.getMessage());

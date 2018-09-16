@@ -5,16 +5,20 @@ import com.barabank.beans.Transaction;
 import com.barabank.dao.BankDao;
 import com.barabank.service.exceptions.InsufficientFundsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 /**
  * @author Ilya Mikheev
  * @author Leonid Zemenkov
  */
 
+
+@Service
+@Transactional
 public class BarabankTransactionService implements BankTransactionService {
 
     private BankDao bankDao;
@@ -27,6 +31,7 @@ public class BarabankTransactionService implements BankTransactionService {
     public void setBankDao(BankDao bankDao) {
         this.bankDao = bankDao;
     }
+
 
 
     /**
@@ -48,7 +53,7 @@ public class BarabankTransactionService implements BankTransactionService {
         transaction.setFromAccount(fromAccount);
         transaction.setToAccount(toAccount);
         transaction.setSum(sum);
-        transaction.setDate(OffsetDateTime.now());
+        transaction.setDate(LocalDateTime.now());
         addTransaction(transaction);
     }
 
@@ -67,10 +72,9 @@ public class BarabankTransactionService implements BankTransactionService {
      * @param sum - сумма списания
      * @throws InsufficientFundsException - исключение, возникающее при недостатке средств на счете списания
      */
-    @Transactional
     @Override
     public void withdrawalFromAccount(long account, BigDecimal sum) throws InsufficientFundsException {
-        Account acc = getBankDao().findAccountByAccountId(account);
+        Account acc = getBankDao().findAccountById(account);
         if (acc.getBalance().compareTo(sum) >= 0) {
             acc.setBalance(acc.getBalance().subtract(sum));
             getBankDao().updateAccount(acc);
@@ -86,7 +90,7 @@ public class BarabankTransactionService implements BankTransactionService {
      */
     @Override
     public void refillAccount(long account, BigDecimal sum) {
-        Account acc = getBankDao().findAccountByAccountId(account);
+        Account acc = getBankDao().findAccountById(account);
         acc.setBalance(acc.getBalance().add(sum));
         getBankDao().updateAccount(acc);
     }

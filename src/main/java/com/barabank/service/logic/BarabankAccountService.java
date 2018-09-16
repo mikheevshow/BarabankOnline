@@ -46,7 +46,7 @@ public class BarabankAccountService implements BankAccountService {
      */
     @Override
     public void addCardToAccount(long accountNumber, BankCardPaymentSystem bankCardPaymentSystem) {
-        Account account = bankDao.findAccountByAccountId(accountNumber);
+        Account account = bankDao.findAccountById(accountNumber);
         BankCard bankCard = new BankCard();
         bankCard.setPaymentSystem(bankCardPaymentSystem);
         Collection<BankCard> bankCardCollection = new HashSet<>();
