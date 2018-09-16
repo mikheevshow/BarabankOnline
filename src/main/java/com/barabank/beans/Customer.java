@@ -32,7 +32,7 @@ public class Customer implements Serializable {
 
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private Set<Account> accounts = new HashSet<>();
+    private List<Account> accounts = new LinkedList<>();
 
     public Customer() {
 
@@ -70,11 +70,11 @@ public class Customer implements Serializable {
         this.person = person;
     }
 
-    public Set<Account> getAccounts() {
+    public List<Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(Set<Account> accounts) {
+    public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
 

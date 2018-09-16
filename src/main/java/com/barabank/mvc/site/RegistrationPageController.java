@@ -46,8 +46,7 @@ public class RegistrationPageController {
 
 
 
-        bankUserService.addPerson(person);
-        bankUserService.addCustomer(customer);
+        bankUserService.addNewUser(customer, person);
 
     }
 

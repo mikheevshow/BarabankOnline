@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * @author Ilya Mikheev
+ * @author Leonid Zemenkov
  * Интерфейс, определяющий поведение объекта DAO
  */
 
