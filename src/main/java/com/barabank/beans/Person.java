@@ -11,7 +11,7 @@ import java.time.LocalDate;
  */
 
 @Entity
-@Table(name = "person")
+@Table(name = "person",schema = "public")
 public class Person implements Serializable {
 
     @Column(name = "first_name", nullable = false)
@@ -23,12 +23,13 @@ public class Person implements Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "phone", nullable = false, unique = true)
+    @Column(name = "phone", nullable = false, unique = true,
+            updatable = false,insertable = false)
     private long phone;
 
     @Id
-    @Column(name = "id",nullable = false, unique = true)
-    private long id;
+    @Column(name = "passport_id",nullable = false, unique = true)
+    private long passportId;
 
     @Column(name = "address", nullable = false)
     private String  address;
@@ -36,9 +37,9 @@ public class Person implements Serializable {
     @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
 
-    @OneToOne(fetch = FetchType.EAGER, mappedBy = "person")
-    @JoinColumn(referencedColumnName = "id")
-    private Customer customer;
+   @OneToOne
+   @JoinColumn(name = "phone",referencedColumnName = "phone")
+   private Customer customer;
 
     public Person() {
 
@@ -76,12 +77,12 @@ public class Person implements Serializable {
         this.phone = phone;
     }
 
-    public long getId() {
-        return id;
+    public long getPassportId() {
+        return passportId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setPassportId(long personId) {
+        this.passportId = personId;
     }
 
     public String getAddress() {
@@ -108,6 +109,7 @@ public class Person implements Serializable {
         this.customer = customer;
     }
 
+
     @Override
     public String toString() {
         return "Person{" +
@@ -115,7 +117,7 @@ public class Person implements Serializable {
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phone=" + phone +
-                ", id=" + id +
+                ", personId=" + passportId +
                 ", address='" + address + '\'' +
                 ", birthDate=" + birthDate +
                 '}';

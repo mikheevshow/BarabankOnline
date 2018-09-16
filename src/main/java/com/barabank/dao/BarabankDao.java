@@ -3,11 +3,17 @@ package com.barabank.dao;
 import com.barabank.beans.*;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,254 +21,201 @@ import java.util.List;
  * @author Leonid Zemenkov
  */
 
-@Transactional(readOnly = true)
+@Transactional
 @Repository("barabankDao")
 public class BarabankDao implements BankDao {
 
-    private final SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    @Autowired
-    public BarabankDao(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 
-    private SessionFactory getSessionFactory() {
-        return sessionFactory;
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
 
     @Override
-    public void createUser(Customer customer, Person person) {
-
-    }
-
     public List<Person> findAllPersons() {
-        return getSessionFactory().getCurrentSession().createQuery("FROM Person p").list();
+        return entityManager.createQuery("from Person").getResultList();
+    }
+
+    @Override
+    public Person findPersonWithPassportID(long passportId) {
+        return (Person) entityManager.createQuery("from Person p where p.passportId=:passportId").
+                setParameter("passportId",passportId).getSingleResult();
     }
 
 
-    public Person findPersonWithPassportID(long ID) {
-        return (Person) getSessionFactory().getCurrentSession().createQuery("FROM Person p WHERE p.id = :ID").setParameter("ID", ID).uniqueResult();
+    @Override
+    public Person findPersonByPhone(long phone) {
+        return (Person)entityManager.createQuery("from Person p where p.phone=:phone").
+                setParameter("phone",phone).getSingleResult();
     }
 
-
-    public Person findPersonByPhone(long person_phone) {
-        return (Person) getSessionFactory().getCurrentSession().createQuery("FROM Person p WHERE p.phone = :phone").setParameter("phone", person_phone).uniqueResult();
-    }
-
-    @Transactional(readOnly = false)
+    @Override
     public Person updatePerson(Person person) {
-        getSessionFactory().getCurrentSession().update(person);
+        entityManager.merge(person);
         return person;
     }
 
-    @Transactional(readOnly = false)
-    public void savePerson(Person person) {
-        getSessionFactory().getCurrentSession().save(person);
+    @Override
+    public Person savePerson(Person person) {
+        entityManager.persist(person);
+        return person;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
     public List<Customer> findAllCustomers() {
-        return getSessionFactory().getCurrentSession().createQuery("FROM Customer c").list();
+        return entityManager.createQuery("from Customer c",Customer.class).getResultList();
     }
 
-    public Customer findCustomerByPhone(long customer_phone) {
-        return (Customer) getSessionFactory().getCurrentSession().createQuery("FROM Customer c WHERE c.phone = :customer_phone").setParameter("customer_phone", customer_phone).uniqueResult();
+    @Override
+    public Customer findCustomerByPhone(long phone) {
+        return (Customer) entityManager.createQuery("from Customer c where c.phone=:phone").
+                setParameter("phone",phone).getSingleResult();
     }
 
-    public Customer findById(long id) {
-        return (Customer) getSessionFactory().getCurrentSession().createQuery("FROM Customer c WHERE c.id = :id").setParameter("id", id).uniqueResult();
+    @Override
+    public Customer findById(long customerId) {
+        return (Customer) entityManager.createQuery("from Customer c where c.id=:id").
+                setParameter("id",customerId).getSingleResult();
     }
 
-    @Transactional(readOnly = false)
+    @Override
     public Customer updateCustomer(Customer customer) {
-        getSessionFactory().getCurrentSession().update(customer);
+        entityManager.merge(customer);
         return customer;
     }
 
-    @Transactional(readOnly = false)
-    public void saveCustomer(Customer customer) {
-        getSessionFactory().getCurrentSession().save(customer);
+    @Override
+    public Customer saveCustomer(Customer customer) {
+        entityManager.persist(customer);
+        return customer;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public List<Account> findAllAccountsForCustomer(Customer customer) {
-        //BigInteger customer_id = user.getId();
-        return getSessionFactory().getCurrentSession().createQuery("FROM Account a WHERE  a.customer = :customer").setParameter("customer", customer).list();
+    @Override
+    public void createUser(Customer customer, Person person) {
+        entityManager.persist(customer);
+        entityManager.persist(person);
     }
 
-    public List<Account> findAllAccountWithCustomerPhone(long phone) {
-        Customer customer = findCustomerByPhone(phone);
-        return getSessionFactory().getCurrentSession().createQuery("FROM Account a WHERE a.customer = :customer").setParameter("customer", customer).list();
-    }
-
-    public Account findAccountByAccountId(long account_id) {
-        return (Account) getSessionFactory().getCurrentSession().createQuery("FROM Account a WHERE a.id = :account_id").setParameter("account_id", account_id).uniqueResult();
-    }
-
-    @Transactional(readOnly = false)
+    @Override
     public Account addAccountForCustomer(Customer customer) {
-
-        //getSessionFactory().getCurrentSession().createQuery("INSERT INTO Account(id, customer, sum) SELECT customer FROM Customer c");
-        return null;
-    }
-
-    @Transactional(readOnly = false)
-    public void updateAccount(Account account) {
-        getSessionFactory().getCurrentSession().update(account);
-    }
-
-    @Transactional(readOnly = false)
-    public Account saveAccount(Account account) {
-        getSessionFactory().getCurrentSession().save(account);
+        Account account = new Account();
+        customer.addAccount(account);
+        account.setCustomer(customer);
+        entityManager.persist(account);
         return account;
     }
 
+    @Override
+    public Account updateAccount(Account account) {
+        entityManager.merge(account);
+        return account;
+    }
+
+    @Override
+    public Account findAccountById(long accountId) {
+        return (Account)entityManager.createQuery("from Account a where a.accountId=:id").
+                setParameter("id",accountId).getSingleResult();
+    }
+
+    @Override
     public List<BankCard> getAccountBindedCards(long account_number) {
-
-        return getSessionFactory().getCurrentSession().createQuery("FROM BankCard bc WHERE bc.account = :account_number").setParameter("account_number", account_number).list();
+        return null;
     }
 
-//    @Transactional(readOnly = false)
-//    public BankCard addCardForAccount(BigInteger account_id) {
-//        getSessionFactory().getCurrentSession().createQuery("INSERT INTO BankCard() ")
-//        return null;
-//    }
-
+    @Override
     public BankCard findCardByCardNumber(long card_number) {
-        return (BankCard) getSessionFactory().getCurrentSession().createQuery("FROM BankCard bc WHERE bc.cardNumber = :card_number").setParameter("card_number", card_number).uniqueResult();
+        return null;
     }
 
+    @Override
     public Account findAccountByCardNumber(long card_number) {
-        long account_number = findCardByCardNumber(card_number).getCardNumber();
-        return findAccountByAccountId(account_number);
+        return null;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public List<Transaction> findAllTransactions() {
-        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t").list();
-    }
-
-    /**
-     * Метод, позволяющий получить список транзакций в которых участвует передаваемый банковский счет
-     * @param account_id - номер банковского счета
-     * @return список транзакций
-     */
-    @Transactional(readOnly = true)
-    public List<Transaction> findAllTransactionsForAccount(long account_id) {
-        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.fromAccount = :account_id OR t.toAccount = :account_id ").setParameter("account_id", account_id).list();
-    }
-
-    /**
-     * Метод, позволяющий получить список транзакций, в которых передаваемый банковский счет выступает в качестве отправителя средств
-     * @param account_id - номер банковского счета
-     * @return список транзакций
-     */
-    @Transactional(readOnly = true)
-    public List<Transaction> findAllSentAccountTransactions(long account_id) {
-        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.fromAccount = :account_id").setParameter("account_id", account_id).list();
-    }
-
-    /**
-     * Метод, позволяющий получить список транзакций, в которых передаваемый банковский счет выступает в получателя средств
-     * @param account_id - номер банковского счета
-     * @return список транзакций
-     */
-    @Transactional(readOnly = true)
-    public List<Transaction> findAllReceivedAccountTransactions(long account_id) {
-
-        return getSessionFactory().getCurrentSession().createQuery("FROM Transaction t WHERE t.toAccount = :account_id").setParameter("account_id", account_id).list();
-    }
-
-    /**
-     * Метод, сохраняющий транзакцию в базу данных
-     * @param transaction - транзакция
-     */
-    @Transactional(readOnly = false)
-    public void saveTransaction(Transaction transaction) {
-        getSessionFactory().getCurrentSession().save(transaction);
-    }
 
 
     @Override
+    public List<Transaction> findAllTransactions() {
+        return entityManager.createQuery("from Transaction ").getResultList();
+    }
+
+    @Override
+    public List<Transaction> findAllTransactionsForAccount(long accountId) {
+        return entityManager.createQuery("from Transaction t where t.fromAccount=:id OR t.toAccount=:id").
+                setParameter("id",accountId).getResultList();
+    }
+
+    @Override
+    public List<Transaction> findAllSentAccountTransactions(long accountId) {
+        return entityManager.createQuery("from Transaction  t where t.fromAccount=:id").
+                setParameter("id",accountId).getResultList();
+    }
+
+    @Override
+    public List<Transaction> findAllReceivedAccountTransactions(long accountId) {
+        return entityManager.createQuery("from Transaction  t where t.toAccount=:id").
+                setParameter("id",accountId).getResultList();
+    }
+
+    @Override
+    public Transaction saveTransaction(Transaction transaction) {
+        entityManager.persist(transaction);
+        return transaction;
+    }
+
+    @Override
     public List<Transaction> getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate) {
-        return null;
+        LocalDateTime start = LocalDateTime.of(startDate, LocalTime.MIN);
+        LocalDateTime end = LocalDateTime.of(endDate,LocalTime.MAX);
+        return entityManager.createQuery("from Transaction t where t.date>= :startDate AND t.date <= :endDate").
+                setParameter("startDate",startDate).setParameter("endDate",endDate).getResultList();
     }
 
     @Override
     public List<Transaction> getBankTransactionsForDay(LocalDate date) {
-        return null;
+        LocalDateTime startDate = LocalDateTime.of(date, LocalTime.MIN);
+        LocalDateTime endDate = LocalDateTime.of(date,LocalTime.MAX);
+        return entityManager.createQuery("from Transaction t where t.date >=:startDate and t.date<=:endDate").
+                setParameter("startDate",startDate).setParameter("endDate",endDate).getResultList();
     }
 
     @Override
     public List<Transaction> getTransactionsForCustomerInPeriod(Customer customer, LocalDate startDate, LocalDate endDate) {
-        return null;
+        List<Transaction> transactions= new LinkedList<>();
+        for(Account account: customer.getAccounts()){
+            transactions.addAll(getTransactionsForAccountInPeriod(account.getAccountId(),startDate,endDate));
+        }
+        return transactions;
     }
 
     @Override
     public List<Transaction> getTransactionsForCustomerInDate(Customer customer, LocalDate date) {
-        return null;
+        List<Transaction> transactions= new LinkedList<>();
+        for(Account account: customer.getAccounts()){
+            transactions.addAll(getTransactionsForAccountInDate(account.getAccountId(),date));
+        }
+        return transactions;
     }
 
     @Override
     public List<Transaction> getTransactionsForAccountInPeriod(long account, LocalDate startDate, LocalDate endDate) {
-        return null;
+        LocalDateTime start = LocalDateTime.of(startDate,LocalTime.MIN);
+        LocalDateTime end = LocalDateTime.of(endDate,LocalTime.MAX);
+        return entityManager.createQuery("from Transaction t where (t.fromAccount=:account or t.toAccount=:account) and t.date>=:startDate and t.date<=:endDate").
+                setParameter("account",account).setParameter("startDate",start).setParameter("endDate",end).getResultList();
     }
 
     @Override
     public List<Transaction> getTransactionsForAccountInDate(long account, LocalDate date) {
-        return null;
+        LocalDateTime startDate = LocalDateTime.of(date, LocalTime.MIN);
+        LocalDateTime endDate = LocalDateTime.of(date,LocalTime.MAX);
+        return entityManager.createQuery("from Transaction t where (t.fromAccount=:account or t.toAccount=:account) and t.date>=:startDate and t.date<= :endDate").
+                setParameter("account",account).setParameter("startDate",date).setParameter("endDate",endDate).getResultList();
     }
 }

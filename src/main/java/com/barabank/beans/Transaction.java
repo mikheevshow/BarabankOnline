@@ -4,7 +4,7 @@ package com.barabank.beans;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 /**
  * @author Ilya Mikheev
@@ -12,15 +12,14 @@ import java.time.OffsetDateTime;
  */
 
 @Entity
-@Table(name = "transaction")
+@Table(name = "transaction",schema = "public")
 public class Transaction implements Serializable {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "transaction_id_generator")
-    //@SequenceGenerator(name = "transaction_id_generator", sequenceName = "transaction_id_sequence")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false, unique = true, updatable = false)
-    private long id;
+    @SequenceGenerator(name = "transaction_id_seq",sequenceName = "transaction_id_seq",allocationSize = 20)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "transaction_id_seq")
+    @Column(name = "transaction_id", nullable = false, unique = true, updatable = false)
+    private long transactionId;
 
     @Column(name = "from_account", nullable = false, updatable = false)
     private long fromAccount;
@@ -32,18 +31,18 @@ public class Transaction implements Serializable {
     private BigDecimal sum;
 
     @Column(name = "date", nullable = false, updatable = false)
-    private OffsetDateTime date;
+    private LocalDateTime date;
 
     public Transaction() {
-        this.setDate(OffsetDateTime.now());
+        this.setDate(LocalDateTime.now());
     }
 
-    public long getId() {
-        return id;
+    public long getTransactionId() {
+        return transactionId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setTransactionId(long id) {
+        this.transactionId = id;
     }
 
     public long getFromAccount() {
@@ -70,18 +69,18 @@ public class Transaction implements Serializable {
         this.sum = sum;
     }
 
-    public OffsetDateTime getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(OffsetDateTime date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
     @Override
     public String toString() {
         return "Transaction{" +
-                "id=" + id +
+                "id=" + transactionId +
                 ", fromAccount=" + fromAccount +
                 ", toAccount=" + toAccount +
                 ", sum=" + sum +
