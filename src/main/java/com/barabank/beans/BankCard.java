@@ -1,5 +1,7 @@
 package com.barabank.beans;
 
+import com.barabank.service.enums.BankCardPaymentSystem;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,6 +30,9 @@ public class BankCard implements Serializable {
 
     @Column(name = "expiration_date", nullable = false, updatable = false)
     private LocalDateTime expirationDate;
+
+    @Enumerated(EnumType.STRING)
+    private BankCardPaymentSystem paymentSystem;
 
     public BankCard() {
 
@@ -71,6 +76,14 @@ public class BankCard implements Serializable {
 
     public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public BankCardPaymentSystem getPaymentSystem() {
+        return paymentSystem;
+    }
+
+    public void setPaymentSystem(BankCardPaymentSystem paymentSystem) {
+        this.paymentSystem = paymentSystem;
     }
 
     @Override
