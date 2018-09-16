@@ -1,16 +1,29 @@
 package com.barabank.mvc.site;
 
+import com.barabank.mvc.site.util.SessionChecker;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/")
 public class IndexPageController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String getIndexPage(Model model) {
-        return "index";
+
+    @RequestMapping(value = {"/","/index"}, method = RequestMethod.GET)
+    public ModelAndView getIndexPage(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
+        modelAndView.addObject("signInSingOut",SessionChecker.sessionCheck(request));
+        return modelAndView;
     }
+
+
+
+
+
 }

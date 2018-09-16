@@ -14,19 +14,15 @@ public class HI {
         response.setMessage("HELLOWORLD!!@!#!#");
         response.setTransactionStatus(TransactionStatus.SUCCESSFUL);
 
-        TransactionResponse response1 = new TransactionResponse();
         try {
 
             System.out.println(jackson.writeValueAsString(response));
             String string = jackson.writeValueAsString(response);
-            response1 = (TransactionResponse) jackson.readValue(string, TransactionResponse.class);
+            TransactionResponse response1 = jackson.readValue(string,TransactionResponse.class);
+            System.out.println(response1.toString());
 
         } catch (IOException ex) {
-
-
         }
-
-        response1.toString();
 
 
     }

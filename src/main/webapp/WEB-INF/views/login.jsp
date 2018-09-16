@@ -23,7 +23,7 @@
             ${userStatus}
             <div>
                 <label>Номер телефона:</label>
-                <input class = "autorization-block__form__field" type="text" name="phone-number" placeholder="Телефон" >
+                <input class = "autorization-block__form__field" type="text" name="phone" placeholder="Телефон" >
             </div>
 
             <div>

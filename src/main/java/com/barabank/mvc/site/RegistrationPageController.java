@@ -3,6 +3,7 @@ package com.barabank.mvc.site;
 
 import com.barabank.beans.Customer;
 import com.barabank.beans.Person;
+import com.barabank.mvc.site.util.SessionChecker;
 import com.barabank.service.logic.BankUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +11,10 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 
@@ -21,9 +24,11 @@ public class RegistrationPageController {
     private BankUserService bankUserService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String indexPage(Model model) {
-        System.out.println("Страница открыта");
-        return "registration";
+    public ModelAndView indexPage(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("signInSingOut", SessionChecker.sessionCheck(request));
+        modelAndView.setViewName("registration");
+        return modelAndView;
     }
 
     @RequestMapping(value = "/registration",method = RequestMethod.POST)
