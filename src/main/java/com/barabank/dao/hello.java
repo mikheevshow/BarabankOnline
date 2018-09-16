@@ -1,5 +1,7 @@
 package com.barabank.dao;
 
+import com.barabank.beans.Customer;
+import com.barabank.beans.Person;
 import com.barabank.beans.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -77,6 +79,24 @@ public class hello {
 
 
 
+    Customer customer = new Customer();
+    customer.setPhone(12345L);
+    customer.setPassword("yterfwd");
+
+        Person person = new Person();
+        person.setPassportId(54321L);
+        person.setFirstName("dfwe");
+        person.setLastName("sdaff");
+        person.setMiddleName("dsfgw");
+        person.setBirthDate(LocalDate.of(2000, 1, 1));
+        person.setPhone(12345L);
+        person.setAddress("asfasdf");
+
+        person.setCustomer(customer);
+        customer.setPerson(person);
+
+
+        bankDao.saveCustomer(customer);
 
     }
 }

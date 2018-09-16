@@ -2,6 +2,7 @@ package com.barabank.mvc.site;
 
 import com.barabank.beans.Customer;
 import com.barabank.beans.Person;
+import com.barabank.mvc.site.util.SessionChecker;
 import com.barabank.service.enums.TransactionReportType;
 import com.barabank.service.logic.BankTransactionReportService;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,7 @@ public class AccountController {
 
             modelAndView.addObject("transactions", bankTransactionReportService.getAllTransactionsForCustomer(customer, TransactionReportType.JSON));
             modelAndView.setViewName("account");
+            modelAndView.addObject("signInSingOut", SessionChecker.sessionCheck(request));
             return modelAndView;
         }
     }

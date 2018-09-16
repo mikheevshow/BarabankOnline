@@ -31,11 +31,11 @@
         </div>
         <div>
             <label>Паспортные данные ID:<star>*</star></label>
-            <input class="input" name="ID" placeholder="ID">
+            <input class="input" name="passportId" placeholder="ID">
         </div>
         <div>
             <label>Телефон:<star>*</star></label>
-            <input class="input" name="telephone" placeholder="Телефон">
+            <input class="input" name="phone" placeholder="Телефон">
         </div>
         <div>
             <label>Адрес:<star>*</star></label>
@@ -43,7 +43,7 @@
         </div>
         <div>
             <label>Дата рождения:<star>*</star></label>
-            <input class="input" type="date" name="birth-day" placeholder="Телефон">
+            <input class="input" type="date" name="birth-day" placeholder="Дата">
         </div>
         <div>
             <label>Пароль:<star>*</star></label>

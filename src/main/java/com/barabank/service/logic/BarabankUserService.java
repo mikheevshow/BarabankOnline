@@ -81,6 +81,6 @@ public class BarabankUserService implements BankUserService {
      */
     @Override
     public void addNewUser(Customer customer, Person person) {
-        getBankDao().createUser(customer, person);
+        getBankDao().saveCustomer(customer);
     }
 }
