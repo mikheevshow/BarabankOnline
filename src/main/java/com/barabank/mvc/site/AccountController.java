@@ -44,7 +44,7 @@ public class AccountController {
             String accountHolderName = person.getFirstName() + " " + person.getMiddleName() + " " + person.getLastName();
 
             //Устанавливаем параметры пользователя
-            modelAndView.addObject("ccountHolderName", accountHolderName);
+            modelAndView.addObject("accountHolderName", accountHolderName);
             modelAndView.addObject("birthDate", person.getBirthDate().toString());
             modelAndView.addObject("phone", person.getPhone());
 
