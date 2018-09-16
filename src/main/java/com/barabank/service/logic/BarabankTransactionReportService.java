@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -109,6 +110,20 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
     public String getTransactionsForAccountInDate(long account, LocalDate date, TransactionReportType transactionReportType) {
         List<Transaction> accountTransactions = getBankDao().getTransactionsForAccountInDate(account, date);
         return JsonXmlParser(accountTransactions, transactionReportType);
+    }
+
+    /**
+     *
+     * @param customer
+     * @param transactionReportType
+     * @return
+     */
+    public String getAllTransactionsForCustomer(Customer customer, TransactionReportType transactionReportType) {
+        List<Transaction> collection = new ArrayList<>();
+        for (Account account : customer.getAccounts()) {
+            collection.addAll(getBankDao().findAllTransactionsForAccount(account.getAccountId()));
+        }
+        return JsonXmlParser(collection, transactionReportType);
     }
 
     /**

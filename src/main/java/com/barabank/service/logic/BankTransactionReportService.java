@@ -15,6 +15,8 @@ public interface BankTransactionReportService {
 
     public String getTransactionsForCustomerInDate(Customer customer, LocalDate date, TransactionReportType transactionReportType);
 
+    public String getAllTransactionsForCustomer(Customer customer, TransactionReportType transactionReportType);
+
     public String getTransactionsForAccountInPeriod(long account, LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType);
 
     public String getTransactionsForAccountInDate(long account, LocalDate date, TransactionReportType transactionReportType);
