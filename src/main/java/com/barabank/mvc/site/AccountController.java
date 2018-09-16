@@ -36,19 +36,19 @@ public class AccountController {
             modelAndView.setViewName("redirect:/login");
             return modelAndView;
         } else {
-            System.out.println("////////////ELSE/////////////");
+
             Person person = (Person) session.getAttribute("person");
             Customer customer = (Customer) session.getAttribute("customer");
 
+
+            String accountHolderName = person.getFirstName() + " " + person.getMiddleName() + " " + person.getLastName();
+
             //Устанавливаем параметры пользователя
-            modelAndView.addObject("first-name", person.getFirstName());
-            modelAndView.addObject("second-name", person.getLastName());
-            modelAndView.addObject("middle-name", person.getMiddleName());
+            modelAndView.addObject("ccountHolderName", accountHolderName);
+            modelAndView.addObject("birthDate", person.getBirthDate().toString());
+            modelAndView.addObject("phone", person.getPhone());
 
             modelAndView.addObject("transactions", bankTransactionReportService.getAllTransactionsForCustomer(customer, TransactionReportType.JSON));
-
-
-
             modelAndView.setViewName("account");
             return modelAndView;
         }

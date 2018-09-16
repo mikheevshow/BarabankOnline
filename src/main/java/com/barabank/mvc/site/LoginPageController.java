@@ -41,7 +41,7 @@ public class LoginPageController {
     @RequestMapping(method = RequestMethod.POST)
     public String authentication(@RequestBody MultiValueMap<String, String> formData, HttpServletRequest request) {
         if((formData.getFirst("phone").trim().length()!=0 && formData.getFirst("password").trim().length()!=0)) {
-            long phone = Long.parseLong(formData.getFirst("phone"));
+            long phone = Long.parseLong(formData.getFirst("telephone"));
             Customer customer;
             Person person;
             try {
@@ -49,7 +49,6 @@ public class LoginPageController {
                 if (person.getCustomer().getPassword().equals(formData.getFirst("password"))) {
                     request.getSession().setAttribute("customer", person.getCustomer());
                     request.getSession().setAttribute("person", person);
-
                     return "redirect:/account";
                 }
                 return "login";
