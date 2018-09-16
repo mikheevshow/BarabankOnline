@@ -23,7 +23,7 @@ public class AccountController {
             Person person = (Person) session.getAttribute("person");
             Customer customer = (Customer) session.getAttribute("customer");
             System.out.println(person.getFirstName());
-            System.out.println(customer.getId());
+            //System.out.println(customer.getId());
             return "account";
         }
     }

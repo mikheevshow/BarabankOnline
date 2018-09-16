@@ -9,33 +9,40 @@ import java.math.BigDecimal;
  * @author Leonid Zemenkov
  */
 
+
 @Entity
 @Table(name = "account")
 public class Account implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_number_generator")
-    @SequenceGenerator(name = "account_number_generator", sequenceName = "account_number_sequence")
-    @Column(name = "id", unique = true, nullable = false)
-    private long id;
+    @SequenceGenerator(name = "account_id_seq",
+                        sequenceName = "account_id_seq",
+                        allocationSize = 20)
 
-    @ManyToOne()
-    @JoinColumn(name = "customer", nullable = false)
-    private Customer customer;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_id_seq")
+    @Column(name = "account_id", unique = true, nullable = false)
+    private long accountId;
 
     @Column(name = "balance", nullable = false)
-    private BigDecimal sum;
+    private BigDecimal balance = BigDecimal.valueOf(0L);
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+
 
     public Account() {
 
     }
 
-    public long getId() {
-        return id;
+    public long getAccountId() {
+        return accountId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 
     public Customer getCustomer() {
@@ -46,20 +53,20 @@ public class Account implements Serializable {
         this.customer = customer;
     }
 
-    public BigDecimal getSum() {
-        return sum;
+    public BigDecimal getBalance() {
+        return balance;
     }
 
-    public void setSum(BigDecimal sum) {
-        this.sum = sum;
+    public void setBalance(BigDecimal sum) {
+        this.balance = sum;
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "id=" + id +
-                ", customer=" + customer +
-                ", sum=" + sum +
+                "account_id=" + accountId +
+                ", customer._id=" + customer.getCustomerId() +
+                ", sum=" + balance +
                 '}';
     }
 }

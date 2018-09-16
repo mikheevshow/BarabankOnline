@@ -10,38 +10,40 @@ import java.util.*;
  */
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customer",schema = "public")
 public class Customer implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_generator")
-    @SequenceGenerator(name = "customer_id_generator", sequenceName = "customer_id_sequence")
-    @Column(name = "id", nullable = false, unique = true)
-    private long id;
+    @SequenceGenerator(name = "customer_id_seq", sequenceName = "customer_id_seq", allocationSize = 20)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "customer_id_seq")
+    @Column(name = "customer_id")
+    private long customerId;
 
-    @Column(name = "phone", nullable = false, unique = true, updatable = false,insertable = false)
+
+    @Column(name = "phone", nullable = false, unique = true)
     private long phone;
 
     @Column(name = "password",nullable = false)
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
-    private List<Account> accounts = new ArrayList<Account>();
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "phone", referencedColumnName = "phone")
+    @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
     private Person person;
+
+
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private Set<Account> accounts = new HashSet<>();
 
     public Customer() {
 
     }
 
-    public long getId() {
-        return id;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public long getPhone() {
@@ -60,23 +62,6 @@ public class Customer implements Serializable {
         this.password = password;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
-    }
-
-    public void setAccounts(List<Account> accounts) {
-        this.accounts = accounts;
-    }
-
-    public void addAccount(Account account) {
-        account.setCustomer(this);
-        getAccounts().add(account);
-    }
-
-    public void removeAccount(Account account) {
-        getAccounts().remove(account);
-    }
-
     public Person getPerson() {
         return person;
     }
@@ -85,12 +70,23 @@ public class Customer implements Serializable {
         this.person = person;
     }
 
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    public void addAccount(Account account){
+        accounts.add(account);
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
-                ", id=" + id +
-                ", phone" + phone +
-                ", password='" + password +
+                "phone=" + phone +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

@@ -1,9 +1,7 @@
 package com.barabank.dao;
 
 import com.barabank.beans.*;
-import com.barabank.service.logic.TransactionReportType;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -15,24 +13,24 @@ import java.util.List;
 public interface BankDao {
 
 
-    public List<Person> findAllPersons();
-    public Person findPersonWithPassportID(long ID);
-    public Person findPersonByPhone(long person_phone);
+    public List findAllPersons();
+    public Person findPersonWithPassportID(long passportId);
+    public Person findPersonByPhone(long phone);
     public Person updatePerson(Person person);
-    public void savePerson(Person person);
+    public Person savePerson(Person person);
 
     public List<Customer> findAllCustomers();
     public Customer findCustomerByPhone(long customer_phone);
     public Customer findById(long id);
     public Customer updateCustomer(Customer customer);
-    public void saveCustomer(Customer customer);
+    public Customer saveCustomer(Customer customer);
 
-    public List<Account> findAllAccountsForCustomer(Customer user);
-    public List<Account> findAllAccountWithCustomerPhone(long phone);
-    public Account findAccountByAccountId(long account_id);
-    public void addAccountForCustomer(Customer customer);
-    public void updateAccount(Account account);
-    public Account saveAccount(Account account);
+    public void createUser(Customer customer, Person person);
+
+    public Account addAccountForCustomer(Customer customer);
+    public Account updateAccount(Account account);
+    public Account findAccountById(long accountId);
+
 
     public List<BankCard> getAccountBindedCards(long account_number);
     public BankCard findCardByCardNumber(long card_number);
@@ -44,7 +42,7 @@ public interface BankDao {
     public List<Transaction> findAllTransactionsForAccount(long account_id);
     public List<Transaction> findAllSentAccountTransactions(long account_id);
     public List<Transaction> findAllReceivedAccountTransactions(long account_id);
-    public void saveTransaction(Transaction transaction);
+    public Transaction saveTransaction(Transaction transaction);
 
 
     public List<Transaction> getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate);

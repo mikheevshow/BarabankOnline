@@ -36,7 +36,7 @@ public class RegistrationPageController {
         person.setLastName(formData.getFirst("second-name"));
         person.setMiddleName(formData.getFirst("middle-name"));
         person.setAddress(formData.getFirst("address"));
-        person.setId(Long.parseLong(formData.getFirst("ID")));
+        person.setPassportId(Long.parseLong(formData.getFirst("ID")));
         person.setPhone(Long.parseLong(formData.getFirst("telephone")));
 
         Customer customer = new Customer();

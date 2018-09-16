@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 /**
  * @author Ilya Mikheev
@@ -48,7 +48,7 @@ public class BarabankTransactionService implements BankTransactionService {
         transaction.setFromAccount(fromAccount);
         transaction.setToAccount(toAccount);
         transaction.setSum(sum);
-        transaction.setDate(OffsetDateTime.now());
+        transaction.setDate(LocalDateTime.now());
         addTransaction(transaction);
     }
 
@@ -70,12 +70,12 @@ public class BarabankTransactionService implements BankTransactionService {
     @Transactional
     @Override
     public void withdrawalFromAccount(long account, BigDecimal sum) throws InsufficientFundsException {
-        Account acc = getBankDao().findAccountByAccountId(account);
-        if (acc.getSum().compareTo(sum) >= 0) {
-            acc.setSum(acc.getSum().subtract(sum));
+        Account acc = getBankDao().findAccountById(account);
+        if (acc.getBalance().compareTo(sum) >= 0) {
+            acc.setBalance(acc.getBalance().subtract(sum));
             getBankDao().updateAccount(acc);
         } else {
-            throw new InsufficientFundsException("Для перевода не хватает" + acc.getSum().subtract(sum));
+            throw new InsufficientFundsException("Для перевода не хватает" + acc.getBalance().subtract(sum));
         }
     }
 
@@ -86,8 +86,8 @@ public class BarabankTransactionService implements BankTransactionService {
      */
     @Override
     public void refillAccount(long account, BigDecimal sum) {
-        Account acc = getBankDao().findAccountByAccountId(account);
-        acc.setSum(acc.getSum().add(sum));
+        Account acc = getBankDao().findAccountById(account);
+        acc.setBalance(acc.getBalance().add(sum));
         getBankDao().updateAccount(acc);
     }
 }

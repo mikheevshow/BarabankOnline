@@ -2,56 +2,106 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
     <!--Подключаем файл свойств-->
     <context:property-placeholder location="classpath:config.properties"/>
 
+
+    <!--<bean customerId="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+        <!--<property name="driverClassName" value="${jdbc.driverClassName}"/>-->
+        <!--<property name="url" value="${jdbc.url}"/>-->
+        <!--<property name="username" value="${jdbc.username}"/>-->
+        <!--<property name="password" value="${jdbc.password}"/>-->
+    <!--</bean>-->
+
+
+    <!--&lt;!&ndash;Подключаем фабрику сессий&ndash;&gt;-->
+    <!--<bean customerId="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"-->
+          <!--p:dataSource-ref="dataSource"-->
+          <!--p:packagesToScan="com.barabank.beans"-->
+          <!--p:hibernateProperties-ref="hibernateProperties"-->
+    <!--/>-->
+
+    <!--<util:properties customerId="hibernateProperties">-->
+        <!--<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>-->
+        <!--<prop key="hibernate.max_fetch_depth">3</prop>-->
+        <!--<prop key="hibernate.show_sql">true</prop>-->
+        <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
+    <!--</util:properties>-->
+
+
+
+    <!--<context:component-scan base-package="com.barabank.beans"/>-->
+
+    <!--&lt;!&ndash;Подключаем менеджер транзакций&ndash;&gt;-->
+    <!--<bean customerId="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"-->
+        <!--p:sessionFactory-ref="sessionFactory"/>-->
+
+
+    <!--&lt;!&ndash;Устанавливает использование аннотаций для транзакций и свойства прокси&ndash;&gt;-->
+    <!--<tx:annotation-driven proxy-target-class="true"/>-->
+
+
+    <!--&lt;!&ndash;Подключаем объект доступа к данным &ndash;&gt;-->
+    <!--<bean customerId="barabankDao" class="com.barabank.dao.BarabankDao"/>-->
+
+    <!--&lt;!&ndash;Запускаем сервисы&ndash;&gt;-->
+    <!--<bean customerId="barabankTransactionReportService" class="com.barabank.service.logic.BarabankTransactionReportService"/>-->
+    <!--<bean customerId="barabankTransactionServive" class="com.barabank.service.logic.BarabankTransactionService"/>-->
+    <!--<bean customerId="barabankCardOperationService" class="com.barabank.service.logic.BarabankCardOperationService"/>-->
+    <!--<bean customerId="barabankUserService" class="com.barabank.service.logic.BarabankUserService"/>-->
+    <!--<bean customerId="barabankAccountService" class="com.barabank.service.logic.BarabankAccountService"/>-->
+    <!--<bean customerId="barabankRestService" class="com.barabank.service.logic.BarabankRestService"/>-->
+
+
+
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${jdbc.driverClassName}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+    <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    <property name="url" value="${jdbc.url}"/>
+    <property name="username" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
     </bean>
 
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>
 
-    <!--Подключаем фабрику сессий-->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
-          p:dataSource-ref="dataSource"
-          p:packagesToScan="com.barabank.beans"
-          p:hibernateProperties-ref="hibernateProperties"
-    />
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <util:properties id="hibernateProperties">
-        <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
-        <prop key="hibernate.max_fetch_depth">3</prop>
-        <prop key="hibernate.show_sql">true</prop>
-    </util:properties>
+    <bean id="emf"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="packagesToScan" value="com.barabank.beans"/>
 
-    <context:component-scan base-package="com.barabank.beans"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.PostgreSQL9Dialect
+                </prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.max_fetch_depth">3</prop>
+                <prop key="hibernate.jdbc.fetch_size">50</prop>
+                <prop key="hibernate.jdbc.batch_size">10</prop>
+            </props>
+        </property>
+    </bean>
 
-    <!--Подключаем менеджер транзакций-->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"
-        p:sessionFactory-ref="sessionFactory"/>
-
-
-    <!--Устанавливает использование аннотаций для транзакций и свойства прокси-->
-    <tx:annotation-driven proxy-target-class="true"/>
-
-
-    <!--Подключаем объект доступа к данным -->
-    <bean id="barabankDao" class="com.barabank.dao.BarabankDao"/>
-
-    <!--Запускаем сервисы-->
-    <bean id="barabankTransactionReportService" class="com.barabank.service.logic.BarabankTransactionReportService"/>
-    <bean id="barabankTransactionServive" class="com.barabank.service.logic.BarabankTransactionService"/>
-    <bean id="barabankCardOperationService" class="com.barabank.service.logic.BarabankCardOperationService"/>
-    <bean id="barabankUserService" class="com.barabank.service.logic.BarabankUserService"/>
-    <bean id="barabankAccountService" class="com.barabank.service.logic.BarabankAccountService"/>
-    <bean id="barabankRestService" class="com.barabank.service.logic.BarabankRestService"/>
+    <context:component-scan base-package="com.barabank.dao"/>
 
 </beans>

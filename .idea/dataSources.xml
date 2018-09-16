@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="barabankdb@localhost" uuid="d50083d9-c237-42c3-8b3a-a9fcb9edb35e">
+    <data-source source="LOCAL" name="config" uuid="8cd5d700-3a00-4b6d-af09-8a88efd6b5cb">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>jdbc.properties
+
+/Users/top4ikru/Downloads/BarabankOnline/src/main/resources/config.properties</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/barabankdb</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432</jdbc-url>
     </data-source>
   </component>
 </project>

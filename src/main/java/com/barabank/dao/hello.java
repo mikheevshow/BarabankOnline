@@ -1,66 +1,79 @@
 package com.barabank.dao;
 
-import com.barabank.beans.Customer;
-import com.barabank.beans.Person;
 import com.barabank.beans.Transaction;
-import com.barabank.service.logic.BarabankTransactionReportService;
-import com.barabank.service.logic.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class hello {
     public static void main(String[] args) {
         ApplicationContext context = new GenericXmlApplicationContext("application-context.xml");
         BankDao bankDao = context.getBean("barabankDao", BankDao.class);
-        BarabankTransactionReportService barabankTransactionReportService = context.getBean("barabankTransactionReportService", BarabankTransactionReportService.class);
-        LocalDate localDate = LocalDate.of(2018,9, 13);
-        System.out.println(barabankTransactionReportService.getTransactionsForAccountInDate(2313L, localDate, TransactionReportType.JSON));
-        //Transaction transaction = new Transaction();
 
-//        transaction.setFromAccount(663636L);
-//        transaction.setToAccount(2313L);
+
+//        Customer customer = new Customer();
+//        customer.setPhone(54L);
+//        customer.setPassword("rgwenrncoeiqpr");
 //
-//        BigDecimal bigDecimal = BigDecimal.valueOf(23632L);
-//        transaction.setSum(bigDecimal);
-//        transaction.setDate(OffsetDateTime.now());
+//        customer = bankDao.saveCustomer(customer);
 //
-//        System.out.println(transaction.toString());
+//        Person person = new Person();
+//        LocalDate localDate = LocalDate.of(1111, 11, 1);
+//        person.setPassportId(123421L);
+//        person.setAddress("sdng");
+//        person.setFirstName("Ivan");
+//        person.setLastName("Ivanov");
+//        person.setMiddleName("Ivanovih");
+//        person.setBirthDate(localDate);
+//        person.setCustomer(customer);
+//
+//        person = bankDao.savePerson(person);
 //
 //
-//        bankDao.saveTransaction(transaction);
+//        System.out.println("HERE");
 //
-//        List<Transaction> list = bankDao.findAllSentAccountTransactions(2323L);
-//
-//        for (Transaction transaction1:list) {
-//            System.out.println(transaction1.toString());
+//        for (int i = 0; i < 10; i++) {
+//            bankDao.addAccountForCustomer(customer);
 //        }
 
 //
-//        Person person = new Person();
-//        person.setFirstName("Ilya");
-//        person.setMiddleName("Dmitrievich");
-//        person.setLastName("Mikheev");
-//        person.setAddress("Reutov, Pobedy 2-46");
-//        person.setId(123456789L);
-//        person.setPhone(79999999999L);
-//        person.setBirthDate(LocalDate.of(1995, 8,2 ));
+//        Person person = bankDao.findPersonWithPassportID(123421L);
 //
-//        Customer customer = new Customer();
+//        System.out.println(person.toString());
 //
-//        customer.setId(person.getPhone());
+//        person.setLastName("Zemenkov");
+//        bankDao.updatePerson(person);
 //
-//        customer.setPassword("1Mikheypop");
-//
-//        person.setCustomer(customer);
-//
-//        //bankDao.saveCustomer(customer);
-//
-//        bankDao.savePerson(person);
+//        System.out.println(person.toString());
+
+        for (int i=342;i<=351;i++){
+            for(int j=342;j<=351;j++) {
+                Transaction transaction = new Transaction();
+                if(i!=j) {
+                    transaction.setFromAccount(i);
+                    transaction.setToAccount(j);
+                    transaction.setDate(LocalDateTime.now());
+                    transaction.setSum(BigDecimal.valueOf((long)i+j));
+                    bankDao.saveTransaction(transaction);
+                }
+            }
+        }
+
+
+        LocalDate today = LocalDate.now().minusDays(1);
+
+        List<Transaction> transactions = bankDao.getBankTransactionsForDay(today);
+
+
+        System.out.println("////////////////////////////////////////////////");
+        for (Transaction transaction : transactions) {
+            System.out.println(transaction.toString());
+        }
+
 
 
     }
