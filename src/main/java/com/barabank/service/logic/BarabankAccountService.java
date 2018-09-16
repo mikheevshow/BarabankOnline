@@ -6,6 +6,7 @@ import com.barabank.beans.Customer;
 import com.barabank.dao.BankDao;
 import com.barabank.service.enums.BankCardPaymentSystem;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -16,6 +17,7 @@ import java.util.HashSet;
  * @author Leonid Zemenkov
  */
 
+@Service
 public class BarabankAccountService implements BankAccountService {
 
     private BankDao bankDao;
@@ -62,7 +64,7 @@ public class BarabankAccountService implements BankAccountService {
      */
     @Override
     public BigDecimal getBalanceWithAccountId(long accountNumber) {
-        return getBankDao().findAccountByAccountId(accountNumber).getBalance();
+        return getBankDao().findAccountById(accountNumber).getBalance();
     }
 
     /**

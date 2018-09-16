@@ -12,15 +12,15 @@ import java.time.LocalDateTime;
  */
 
 @Entity
-@Table(name = "bank_card")
+@Table(name = "bank_card",schema = "public")
 public class BankCard implements Serializable {
 
+    @SequenceGenerator(name = "bankcard_id_seq",sequenceName = "bankcard_id_seq",allocationSize = 20)
+
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "bankcard_id_seq")
     @Column(name = "card_number", nullable = false, unique = true, updatable = false)
     private long cardNumber;
-
-    @Column(name = "account", nullable = false, updatable = false)
-    private long account;
 
     @Column(name = "security_code", nullable = false, updatable = false)
     private int securityCode;
@@ -34,6 +34,11 @@ public class BankCard implements Serializable {
     @Enumerated(EnumType.STRING)
     private BankCardPaymentSystem paymentSystem;
 
+
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
     public BankCard() {
 
     }
@@ -46,11 +51,11 @@ public class BankCard implements Serializable {
         this.cardNumber = cardNumber;
     }
 
-    public long getAccount() {
+    public Account getAccount() {
         return account;
     }
 
-    public void setAccount(long account) {
+    public void setAccount(Account account) {
         this.account = account;
     }
 
