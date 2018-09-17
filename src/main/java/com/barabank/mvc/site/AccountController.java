@@ -52,6 +52,10 @@ public class AccountController {
             modelAndView.addObject("transactions", bankTransactionReportService.getAllTransactionsForCustomer(customer, TransactionReportType.JSON));
             modelAndView.setViewName("account");
             modelAndView.addObject("signInSingOut", SessionChecker.sessionCheck(request));
+            modelAndView.addObject("acoountsJson",customer.getAccounts().toString());
+
+            modelAndView.addObject("transactionJSON",bankTransactionReportService.getAllTransactionsForCustomer(customer,TransactionReportType.JSON));
+
             return modelAndView;
         }
     }

@@ -72,35 +72,36 @@
                 Информация о счетах
             </div>
 
-            <div class = "informtion-line">
-                Номер счета: ${accNum}
-            </div>
+            <%--<div class = "informtion-line">--%>
+                <%--Номер счета: ${accNum}--%>
+            <%--</div>--%>
 
-            <div class = "informtion-line">
-                Карта
-            </div>
+            <%--<div class = "informtion-line">--%>
+                <%--Карта--%>
+            <%--</div>--%>
 
-            <div class = "informtion-line">
-                Баланс: ${balance}
-            </div>
+            <%--<div class = "informtion-line">--%>
+                <%--Баланс: ${balance}--%>
+            <%--</div>--%>
 
-            <div class = "informtion-line">
-                Овердрафт: ${overdraft}
-            </div>
+            <%--<div class = "informtion-line">--%>
+                <%--Овердрафт: ${overdraft}--%>
+            <%--</div>--%>
 
-            <div class = "get-account-info-button">
-                Получить выписку по счету
-            </div>
-
+            <%--<div class = "get-account-info-button">--%>
+                <%--Получить выписку по счету--%>
+            <%--</div>--%>
+            ${acoountsJson}
         </div>
 
         <div class = "account-info-container__transactions">
             <div class = "account-info-container__h1">
                 Информация о переводах
             </div>
-            <table class="transactions-list">
+            <%--<table class="transactions-list">--%>
 
-            </table>
+            <%--</table>--%>
+            ${transactionJSON}
         </div>
     </div>
 </div>
