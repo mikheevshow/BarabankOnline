@@ -1,27 +1,23 @@
 package com.barabank.mvc.site;
 
 
-import com.barabank.beans.Account;
 import com.barabank.beans.Customer;
 import com.barabank.beans.Person;
 import com.barabank.mvc.site.util.SessionChecker;
 import com.barabank.service.logic.BankAccountService;
 import com.barabank.service.logic.BankUserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @Controller
-
 public class RegistrationPageController {
 
     @Resource
@@ -61,8 +57,6 @@ public class RegistrationPageController {
 
     @RequestMapping(value = "/registration",method = RequestMethod.POST)
     public ModelAndView  getRegistrationFormData(@RequestBody MultiValueMap<String, String> formData,HttpServletRequest request) {
-        //Валидирование данных
-        //После валидирования
 
         ModelAndView modelAndView = new ModelAndView();
 

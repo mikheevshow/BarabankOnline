@@ -11,10 +11,13 @@
     <title>Barabånk - перевод средсв</title>
     <%@include file="/WEB-INF/views/page_members/styles.jsp"%>
 
+
 </head>
 <body>
 
 <%@include file="/WEB-INF/views/page_members/header.jsp" %>
+
+
 
 <div class="content">
 
@@ -25,10 +28,13 @@
         <div>
             <label>Счёт списания:<star>*</star></label>
             <%--<input class="input" name="reciver_account" placeholder="Номер счёта">--%>
+            <select id = "accounts-list" name = "accounts">
+
+            </select>
         </div>
 
         <div>
-            <label>Доступный лимит:</label>
+            <label>Доступный лимит: {$balance} </label>
         </div>
 
         <div>
@@ -48,6 +54,8 @@
 </div>
 
 <%@include file="/WEB-INF/views/page_members/footer.jsp" %>
+
+<script src = "/WEB-INF/resources/js/accounts_list.js"></script>
 
 </body>
 </html>

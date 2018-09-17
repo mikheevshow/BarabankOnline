@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Barabånk - перевод средств</title>
+    <%@include file="/WEB-INF/views/page_members/styles.jsp"%>
 </head>
 <body>
 

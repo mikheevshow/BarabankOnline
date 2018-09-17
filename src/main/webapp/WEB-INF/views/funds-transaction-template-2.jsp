@@ -28,7 +28,7 @@
         </div>
 
         <div>
-            <label>Доступный лимит:</label>
+            <label>Доступный лимит: {$balance}</label>
         </div>
 
 
