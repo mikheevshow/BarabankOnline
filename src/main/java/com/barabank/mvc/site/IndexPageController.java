@@ -17,7 +17,7 @@ public class IndexPageController {
     @RequestMapping(value = {"/","/index"}, method = RequestMethod.GET)
     public ModelAndView getIndexPage(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("funds-transaction-template-2");
+        modelAndView.setViewName("index");
         modelAndView.addObject("signInSingOut",SessionChecker.sessionCheck(request));
         modelAndView.addObject("transactionResultMessage", "Операция успешно проведена!");
         return modelAndView;
