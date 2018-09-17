@@ -49,9 +49,14 @@ public class RegistrationPageController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView indexPage(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("signInSingOut", SessionChecker.sessionCheck(request));
-        modelAndView.setViewName("registration");
-        return modelAndView;
+        if(request.getSession(false)==null) {
+            modelAndView.addObject("signInSingOut", SessionChecker.sessionCheck(request));
+            modelAndView.setViewName("registration");
+            return modelAndView;
+        } else {
+            modelAndView.setViewName("redirect:/account");
+            return modelAndView;
+        }
     }
 
     @RequestMapping(value = "/registration",method = RequestMethod.POST)
@@ -85,6 +90,7 @@ public class RegistrationPageController {
             person.setPassportId(Long.parseLong(formData.getFirst("passportId")));
             person.setAddress(formData.getFirst("address"));
             person.setBirthDate(LocalDate.parse(formData.getFirst("birth-day")));
+            person.setPhone(Long.parseLong(formData.getFirst("phone")));
 
             Customer customer = new Customer();
             customer.setPassword(formData.getFirst("password"));
@@ -100,15 +106,16 @@ public class RegistrationPageController {
             bankUserService.addNewUser(customer,person);
             accountService.openBankAccountFor(customer);
 
-            request.getSession().setAttribute("person",person);
             request.getSession().setAttribute("customer",customer);
+            request.getSession().setAttribute("person",person);
 
             modelAndView.setViewName("redirect:/account");
             return modelAndView;
 
+        }else {
+            modelAndView.setViewName("registration");
+            return modelAndView;
         }
-        modelAndView.setViewName("registration");
-        return modelAndView;
     }
 
 }

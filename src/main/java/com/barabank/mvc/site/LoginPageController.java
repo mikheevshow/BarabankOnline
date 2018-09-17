@@ -33,9 +33,14 @@ public class LoginPageController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView loginPage(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
-        modelAndView.addObject("signInSingOut", SessionChecker.sessionCheck(request));
-        return modelAndView;
+        if(request.getSession(false)==null) {
+            modelAndView.setViewName("login");
+            modelAndView.addObject("signInSingOut", SessionChecker.sessionCheck(request));
+            return modelAndView;
+        } else {
+            modelAndView.setViewName("redirect:/account");
+            return modelAndView;
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST)

@@ -13,6 +13,6 @@ public class DeauthenticationController {
     @RequestMapping(method = RequestMethod.GET)
     public String deauthentication(HttpServletRequest request){
         request.getSession().invalidate();
-        return "redirect:/index";
+        return "redirect:/";
     }
 }
