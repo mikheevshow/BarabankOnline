@@ -13,6 +13,9 @@
 </head>
 <body>
 
+<%@include file="/WEB-INF/views/page_members/header.jsp" %>
+
+
 <div class="content">
     <div class = "create-transaction-button button-type-one">
         <a href="/money-transactions/self-transactions">Перевод между своими счетами</a>
@@ -26,6 +29,8 @@
         <a href="/money-transactions/outer-bank-transactions">Перевод на счёт в другой банк</a>
     </div>
 </div>
+
+<%@include file="/WEB-INF/views/page_members/footer.jsp" %>
 
 </body>
 </html>

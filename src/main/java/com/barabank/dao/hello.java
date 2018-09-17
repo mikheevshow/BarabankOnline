@@ -77,26 +77,39 @@ public class hello {
 //        }
 
 
+//
+//
+//    Customer customer = new Customer();
+//    customer.setPhone(12345L);
+//    customer.setPassword("yterfwd");
+//
+//        Person person = new Person();
+//        person.setPassportId(54321L);
+//        person.setFirstName("dfwe");
+//        person.setLastName("sdaff");
+//        person.setMiddleName("dsfgw");
+//        person.setBirthDate(LocalDate.of(2000, 1, 1));
+//        person.setPhone(12345L);
+//        person.setAddress("asfasdf");
+//
+//        person.setCustomer(customer);
+//        customer.setPerson(person);
+//
+//
+//        bankDao.saveCustomer(customer);
 
+        //System.out.println(bankDao.findCustomerById(662));
+        System.out.println("//////////1///////////");
+        System.out.println(bankDao.findCustomerByPhone(89999698828L));
 
-    Customer customer = new Customer();
-    customer.setPhone(12345L);
-    customer.setPassword("yterfwd");
+        System.out.println("//////////2///////////");
+        System.out.println(bankDao.findPersonByPhone(89999698828L));
 
-        Person person = new Person();
-        person.setPassportId(54321L);
-        person.setFirstName("dfwe");
-        person.setLastName("sdaff");
-        person.setMiddleName("dsfgw");
-        person.setBirthDate(LocalDate.of(2000, 1, 1));
-        person.setPhone(12345L);
-        person.setAddress("asfasdf");
+        System.out.println("//////////3///////////");
+        System.out.println(bankDao.findPersonByPhone(89999698828L).getCustomer().toString());
 
-        person.setCustomer(customer);
-        customer.setPerson(person);
-
-
-        bankDao.saveCustomer(customer);
+     //   System.out.println("///////////4//////////");
+     //   System.out.println(bankDao.findCustomerByPhone(54L).getPerson().toString());
 
     }
 }

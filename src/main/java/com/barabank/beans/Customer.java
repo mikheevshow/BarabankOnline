@@ -1,5 +1,7 @@
 package com.barabank.beans;
 
+import antlr.collections.impl.LList;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -29,7 +31,6 @@ public class Customer implements Serializable {
 
     @OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
     private Person person;
-
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Account> accounts = new LinkedList<>();

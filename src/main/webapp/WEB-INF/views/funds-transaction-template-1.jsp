@@ -14,7 +14,7 @@
 
 </head>
 <body>
-
+<script src = "/WEB-INF/resources/js/accounts_list.js"></script>
 <%@include file="/WEB-INF/views/page_members/header.jsp" %>
 
 
@@ -27,10 +27,10 @@
 
         <div>
             <label>Счёт списания:<star>*</star></label>
-            <%--<input class="input" name="reciver_account" placeholder="Номер счёта">--%>
-            <select id = "accounts-list" name = "accounts">
+            <input class="input" name="sender_account" placeholder="Номер счёта">
+            <%--<select id = "accounts-list" name = "accounts">--%>
 
-            </select>
+            <%--</select>--%>
         </div>
 
         <div>
@@ -39,7 +39,7 @@
 
         <div>
             <label>Счёт зачисления:<star>*</star></label>
-            <%--<input class="input" name="reciver_account" placeholder="Номер счёта">--%>
+            <input class="input" name="reciver_account" placeholder="Номер счёта">
         </div>
 
         <div>
@@ -55,7 +55,6 @@
 
 <%@include file="/WEB-INF/views/page_members/footer.jsp" %>
 
-<script src = "/WEB-INF/resources/js/accounts_list.js"></script>
 
 </body>
 </html>

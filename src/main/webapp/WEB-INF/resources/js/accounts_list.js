@@ -5,7 +5,7 @@ dropdown.empty();
 dropdown.append('<option selected="true" disabled>Выберете счёт</option>');
 dropdown.prop('selectedIndex', 0);
 
-const url = 'localhost:8080/money-transactions/banktransaction/accounts';
+const url = 'localhost:8016/money-transactions/banktransaction/accounts';
 
 $.getJSON(url, function (data) {
     $.each(data, function (key, entry) {

@@ -70,13 +70,14 @@ public class BarabankDao implements BankDao {
 
     @Override
     public Customer findCustomerByPhone(long phone) {
-        return (Customer) entityManager.createQuery("from Customer c where c.phone="+phone).getSingleResult();
+        return (Customer) entityManager.createQuery("from Customer c where c.phone=:phone").
+                setParameter("phone",phone).getSingleResult();
     }
 
     @Override
-    public Customer findById(long customerId) {
-        return (Customer) entityManager.createQuery("from Customer c where c.id=:id").
-                setParameter("id",customerId).getSingleResult();
+    public Customer findCustomerById(long customerId) {
+        return (Customer) entityManager.createQuery("from Customer c where c.customerId=:customerId").
+                setParameter("customerId",customerId).getSingleResult();
     }
 
     @Override

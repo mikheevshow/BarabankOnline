@@ -22,7 +22,7 @@ public interface BankDao {
 
     public List<Customer> findAllCustomers();
     public Customer findCustomerByPhone(long customer_phone);
-    public Customer findById(long id);
+    public Customer findCustomerById(long id);
     public Customer updateCustomer(Customer customer);
     public Customer saveCustomer(Customer customer);
 
