@@ -31,7 +31,7 @@
     <div class = "buttons-container">
 
         <div class = "create-transaction-button button-type-one">
-            Перевод
+            <a href="/money-transactions">Перевод</a>>
         </div>
 
         <div class = "order-debit-card-button button-type-one">

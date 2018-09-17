@@ -32,8 +32,6 @@ public class BarabankTransactionService implements BankTransactionService {
         this.bankDao = bankDao;
     }
 
-
-
     /**
      * Переводит деньги с одного счета на другой
      * @param fromAccount - номер счета отправителя
