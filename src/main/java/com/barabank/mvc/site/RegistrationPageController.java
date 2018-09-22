@@ -84,12 +84,10 @@ public class RegistrationPageController {
             person.setPassportId(Long.parseLong(formData.getFirst("passportId")));
             person.setAddress(formData.getFirst("address"));
             person.setBirthDate(LocalDate.parse(formData.getFirst("birth-day")));
-            person.setPhone(Long.parseLong(formData.getFirst("phone")));
 
             Customer customer = new Customer();
             customer.setPassword(formData.getFirst("password"));
             customer.setPhone(Long.parseLong(formData.getFirst("phone")));
-
 
             customer.setPerson(person);
             person.setCustomer(customer);
@@ -97,7 +95,7 @@ public class RegistrationPageController {
             System.out.println(customer.toString());
             System.out.println(person.toString());
 
-            bankUserService.addNewUser(customer,person);
+            bankUserService.addNewUser(customer);
             accountService.openBankAccountFor(customer);
 
             request.getSession().setAttribute("customer",customer);

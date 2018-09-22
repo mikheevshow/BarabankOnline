@@ -48,18 +48,19 @@ public class LoginPageController {
         if((formData.getFirst("phone").trim().length()!=0 && formData.getFirst("password").trim().length()!=0)) {
             long phone = Long.parseLong(formData.getFirst("phone"));
             Customer customer;
-            Person person;
             try {
-                person = service.findPersonByPhone(phone);
-                if (person.getCustomer().getPassword().equals(formData.getFirst("password"))) {
-                    request.getSession().setAttribute("customer", person.getCustomer());
-                    request.getSession().setAttribute("person", person);
+                System.out.println("Try to find person");
+                customer = service.findCustomerByPhone(phone);
+                if (customer.getPassword().equals(formData.getFirst("password"))) {
+                    request.getSession().setAttribute("customer", customer);
+                    request.getSession().setAttribute("person", customer.getPerson());
                     System.out.println("//////login//////");
                     return "redirect:/account";
                 }
-                return "login";
+                else{
+                    return "login";
+                }
             } catch (UserNotExistException ex) {
-                ex.printStackTrace();
                 return "login";
             }
         }

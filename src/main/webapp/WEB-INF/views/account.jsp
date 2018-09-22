@@ -16,8 +16,8 @@
     <%@include file="/WEB-INF/views/page_members/styles.jsp"%>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="WEB-INF/resource/js/offer_card_window.js"></script>
-    <script src="WEB-INF/resource/js/transaction_window.js"></script>
+    <script src="/WEB-INF/resources/js/accounts_list.js"></script>
+
 
 </head>
 
@@ -31,7 +31,7 @@
     <div class = "buttons-container">
 
         <div class = "create-transaction-button button-type-one">
-            <a href="/money-transactions">Перевод</a>>
+            <a href="/money-transactions">Перевод</a>
         </div>
 
         <div class = "order-debit-card-button button-type-one">
@@ -91,7 +91,7 @@
             <%--<div class = "get-account-info-button">--%>
                 <%--Получить выписку по счету--%>
             <%--</div>--%>
-            ${acoountsJson}
+            ${accountsJson}
         </div>
 
         <div class = "account-info-container__transactions">

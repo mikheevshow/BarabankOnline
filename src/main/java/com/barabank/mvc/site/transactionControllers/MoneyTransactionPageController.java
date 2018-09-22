@@ -52,6 +52,7 @@ public class MoneyTransactionPageController {
     @RequestMapping(value = "/self-transactions", method = RequestMethod.POST)
     public ModelAndView SelfTransaction(@RequestBody MultiValueMap<String, String> formData) {
         ModelAndView modelAndView = new ModelAndView();
+
         if(formData.getFirst("sender_account").trim().length()!=0 &&
             formData.getFirst("reciver_account").trim().length()!=0 &&
             formData.getFirst("sum").trim().length()!=0) {
@@ -59,7 +60,6 @@ public class MoneyTransactionPageController {
             long senderAccount = Long.parseLong(formData.getFirst("sender_account"));
             long reciverAccount = Long.parseLong(formData.getFirst("reciver_account"));
             BigDecimal sum = BigDecimal.valueOf(Long.parseLong(formData.getFirst("sum")));
-
             try{
                 transactionService.transferMoney(senderAccount,reciverAccount,sum);
                 modelAndView.addObject("transactionResultMessage","Операция провеена успешно!");

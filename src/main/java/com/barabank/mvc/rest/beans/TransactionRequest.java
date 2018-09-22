@@ -2,6 +2,7 @@ package com.barabank.mvc.rest.beans;
 
 import com.barabank.beans.Transaction;
 import com.barabank.mvc.rest.Enumerators.TransactionType;
+import jdk.nashorn.internal.objects.annotations.Getter;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

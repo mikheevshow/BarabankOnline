@@ -24,14 +24,13 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
 
     private BankDao bankDao;
 
-    private BankDao getBankDao() {
-        return bankDao;
-    }
-
     @Autowired
-    public void setBankDao(BankDao bankDao) {
+    public BarabankTransactionReportService(BankDao bankDao) {
         this.bankDao = bankDao;
     }
+
+
+
 
     /**
      * Метод получения списка банковских транзакций за некоторый период
@@ -41,7 +40,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      * @return строка Json или XML
      */
     public String getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType) {
-        List<Transaction> bankTransactions = getBankDao().getBankTransactionsForPeriod(startDate, endDate);
+        List<Transaction> bankTransactions = bankDao.getBankTransactionsForPeriod(startDate, endDate);
         return JsonXmlParser(bankTransactions, transactionReportType);
     }
 
@@ -52,7 +51,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      * @return строка Json или XML
      */
     public String getBankTransactionsForDay(LocalDate date, TransactionReportType transactionReportType) {
-        List<Transaction> bankTransactions = getBankDao().getBankTransactionsForDay(date);
+        List<Transaction> bankTransactions = bankDao.getBankTransactionsForDay(date);
         return JsonXmlParser(bankTransactions, transactionReportType);
     }
 
@@ -67,7 +66,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      */
     public String getTransactionsForCustomerInPeriod(Customer customer, LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType) {
         List<Account> customerAccountList = customer.getAccounts();
-        List<Transaction> customerTransactions = getBankDao().getTransactionsForCustomerInPeriod(customer, startDate, endDate);
+        List<Transaction> customerTransactions = bankDao.getTransactionsForCustomerInPeriod(customer, startDate, endDate);
         return JsonXmlParser(customerAccountList, transactionReportType);
     }
 
@@ -81,7 +80,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      */
     public String getTransactionsForCustomerInDate(Customer customer, LocalDate date, TransactionReportType transactionReportType) {
         List<Account> customerAccountList = customer.getAccounts();
-        List<Transaction> customerTransactions = getBankDao().getTransactionsForCustomerInDate(customer, date);
+        List<Transaction> customerTransactions = bankDao.getTransactionsForCustomerInDate(customer, date);
         return JsonXmlParser(customerTransactions, transactionReportType);
     }
 
@@ -95,7 +94,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      * @return строка Json или XML
      */
     public String getTransactionsForAccountInPeriod(long account, LocalDate startDate, LocalDate endDate, TransactionReportType transactionReportType) {
-        List<Transaction> accountTransactions = getBankDao().getTransactionsForAccountInPeriod(account, startDate, endDate);
+        List<Transaction> accountTransactions = bankDao.getTransactionsForAccountInPeriod(account, startDate, endDate);
         return JsonXmlParser(accountTransactions, transactionReportType);
     }
 
@@ -108,7 +107,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
      * @return строка Json или XML
      */
     public String getTransactionsForAccountInDate(long account, LocalDate date, TransactionReportType transactionReportType) {
-        List<Transaction> accountTransactions = getBankDao().getTransactionsForAccountInDate(account, date);
+        List<Transaction> accountTransactions = bankDao.getTransactionsForAccountInDate(account, date);
         return JsonXmlParser(accountTransactions, transactionReportType);
     }
 
@@ -121,7 +120,7 @@ public class BarabankTransactionReportService implements BankTransactionReportSe
     public String getAllTransactionsForCustomer(Customer customer, TransactionReportType transactionReportType) {
         List<Transaction> collection = new ArrayList<>();
         for (Account account : customer.getAccounts()) {
-            collection.addAll(getBankDao().findAllTransactionsForAccount(account.getAccountId()));
+            collection.addAll(bankDao.findAllTransactionsForAccount(account.getAccountId()));
         }
         return JsonXmlParser(collection, transactionReportType);
     }

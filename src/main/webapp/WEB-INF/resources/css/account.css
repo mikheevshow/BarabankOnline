@@ -135,3 +135,6 @@ a {
     transition: 0.3s;
     cursor: pointer;
 }
+.account-info-container__transactions{
+    max-width: 500px;
+}

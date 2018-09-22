@@ -22,14 +22,12 @@ public class BarabankAccountService implements BankAccountService {
 
     private BankDao bankDao;
 
-    private BankDao getBankDao() {
-        return bankDao;
-    }
-
     @Autowired
-    public void setBankDao(BankDao bankDao) {
+    public BarabankAccountService(BankDao bankDao) {
         this.bankDao = bankDao;
     }
+
+
 
     /**
      * Открывает новый счет для клиента банка
@@ -38,7 +36,7 @@ public class BarabankAccountService implements BankAccountService {
      */
     @Override
     public Account openBankAccountFor(Customer customer) {
-        return getBankDao().addAccountForCustomer(customer);
+        return bankDao.addAccountForCustomer(customer);
     }
 
     /**
@@ -54,7 +52,7 @@ public class BarabankAccountService implements BankAccountService {
         Collection<BankCard> bankCardCollection = new HashSet<>();
         bankCardCollection.add(bankCard);
         account.addBankCards(bankCardCollection);
-        getBankDao().updateAccount(account);
+        bankDao.updateAccount(account);
     }
 
     /**
@@ -64,7 +62,7 @@ public class BarabankAccountService implements BankAccountService {
      */
     @Override
     public BigDecimal getBalanceWithAccountId(long accountNumber) {
-        return getBankDao().findAccountById(accountNumber).getBalance();
+        return bankDao.findAccountById(accountNumber).getBalance();
     }
 
     /**
@@ -74,6 +72,6 @@ public class BarabankAccountService implements BankAccountService {
      */
     @Override
     public BigDecimal getBalanceWithCardNumber(long cardNumber) {
-        return getBankDao().findAccountByCardNumber(cardNumber).getBalance();
+        return bankDao.findAccountByCardNumber(cardNumber).getBalance();
     }
 }

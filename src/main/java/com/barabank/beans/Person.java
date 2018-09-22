@@ -23,9 +23,9 @@ public class Person implements Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "phone", nullable = false, unique = true,
+    @Column(name = "customer_id", nullable = false, unique = true,
             updatable = false,insertable = false)
-    private long phone;
+    private long customerId;
 
     @Id
     @Column(name = "passport_id",nullable = false, unique = true)
@@ -38,7 +38,7 @@ public class Person implements Serializable {
     private LocalDate birthDate;
 
    @OneToOne
-   @JoinColumn(name = "phone",referencedColumnName = "phone")
+   @JoinColumn(name = "customer_id")
    private Customer customer;
 
     public Person() {
@@ -69,12 +69,12 @@ public class Person implements Serializable {
         this.lastName = lastName;
     }
 
-    public long getPhone() {
-        return phone;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setPhone(long phone) {
-        this.phone = phone;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public long getPassportId() {
@@ -116,7 +116,7 @@ public class Person implements Serializable {
                 "firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", phone=" + phone +
+                ", customerId=" + customerId +
                 ", personId=" + passportId +
                 ", address='" + address + '\'' +
                 ", birthDate=" + birthDate +

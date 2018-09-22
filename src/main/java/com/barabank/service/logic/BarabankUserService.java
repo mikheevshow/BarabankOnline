@@ -7,6 +7,8 @@ import com.barabank.service.exceptions.UserNotExistException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.NoResultException;
+
 /**
  * @author Ilya Mikheev
  * @author Leonid Zemenkov
@@ -17,12 +19,8 @@ public class BarabankUserService implements BankUserService {
 
     private BankDao bankDao;
 
-    private BankDao getBankDao() {
-        return bankDao;
-    }
-
     @Autowired
-    public void setBankDao(BankDao bankDao) {
+    public BarabankUserService(BankDao bankDao) {
         this.bankDao = bankDao;
     }
 
@@ -34,11 +32,11 @@ public class BarabankUserService implements BankUserService {
      */
     @Override
     public Customer findCustomerByPhone(long phone) throws UserNotExistException {
-        Customer customer = getBankDao().findCustomerByPhone(phone);
-        if (customer != null) {
+        try {
+            Customer customer = bankDao.findCustomerByPhone(phone);
             return customer;
-        } else {
-            throw new UserNotExistException("Клиент с номером" + phone + "не найден");
+        } catch (NoResultException ex){
+            throw new UserNotExistException("cant find customer by phone: "+phone,ex);
         }
     }
 
@@ -50,11 +48,11 @@ public class BarabankUserService implements BankUserService {
      */
     @Override
     public Person findPersonById(long id) throws UserNotExistException {
-        Person person = getBankDao().findPersonWithPassportID(id);
-        if (person != null) {
+        try {
+            Person person = bankDao.findPersonWithPassportID(id);
             return person;
-        } else {
-            throw new UserNotExistException("Пользователь не найден");
+        } catch (NoResultException ex){
+            throw new UserNotExistException("cant find person by id: "+id,ex);
         }
     }
 
@@ -66,21 +64,20 @@ public class BarabankUserService implements BankUserService {
      */
     @Override
     public Person findPersonByPhone(long phone) throws UserNotExistException {
-        Person person = getBankDao().findPersonByPhone(phone);
-        if (person != null) {
+        try {
+            Person person = bankDao.findPersonByPhone(phone);
             return person;
-        } else {
-            throw new UserNotExistException("Пользователь с номером  " + phone + " не найден");
+        } catch (NoResultException ex){
+            throw new UserNotExistException("cant find person by phone: "+phone,ex);
         }
     }
 
     /**
      * Метод, создающий нового пользователя в системе
      * @param customer
-     * @param person
      */
     @Override
-    public void addNewUser(Customer customer, Person person) {
-        getBankDao().saveCustomer(customer);
+    public void addNewUser(Customer customer) {
+        bankDao.saveCustomer(customer);
     }
 }

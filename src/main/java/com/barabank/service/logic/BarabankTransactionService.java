@@ -23,14 +23,12 @@ public class BarabankTransactionService implements BankTransactionService {
 
     private BankDao bankDao;
 
-    private BankDao getBankDao() {
-        return bankDao;
-    }
-
     @Autowired
-    public void setBankDao(BankDao bankDao) {
+    public BarabankTransactionService(BankDao bankDao) {
         this.bankDao = bankDao;
     }
+
+
 
     /**
      * Переводит деньги с одного счета на другой
@@ -61,7 +59,7 @@ public class BarabankTransactionService implements BankTransactionService {
      */
     @Override
     public void addTransaction(Transaction transaction) {
-        getBankDao().saveTransaction(transaction);
+        bankDao.saveTransaction(transaction);
     }
 
     /**
@@ -72,10 +70,10 @@ public class BarabankTransactionService implements BankTransactionService {
      */
     @Override
     public void withdrawalFromAccount(long account, BigDecimal sum) throws InsufficientFundsException {
-        Account acc = getBankDao().findAccountById(account);
+        Account acc = bankDao.findAccountById(account);
         if (acc.getBalance().compareTo(sum) >= 0) {
             acc.setBalance(acc.getBalance().subtract(sum));
-            getBankDao().updateAccount(acc);
+            bankDao.updateAccount(acc);
         } else {
             throw new InsufficientFundsException("Для перевода не хватает" + acc.getBalance().subtract(sum));
         }
@@ -88,8 +86,8 @@ public class BarabankTransactionService implements BankTransactionService {
      */
     @Override
     public void refillAccount(long account, BigDecimal sum) {
-        Account acc = getBankDao().findAccountById(account);
+        Account acc = bankDao.findAccountById(account);
         acc.setBalance(acc.getBalance().add(sum));
-        getBankDao().updateAccount(acc);
+        bankDao.updateAccount(acc);
     }
 }

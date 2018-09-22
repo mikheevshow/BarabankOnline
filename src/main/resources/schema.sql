@@ -9,7 +9,7 @@ CREATE TABLE public.person
     column_7 int,
     birth_data timestamp NOT NULL
 );
-CREATE UNIQUE INDEX person_phone_uindex ON public.person (phone);
+CREATE UNIQUE INDEX person_phone_uindex ON public.person (customer_id);
 CREATE UNIQUE INDEX person_id_uindex ON public.person (id);
 
 

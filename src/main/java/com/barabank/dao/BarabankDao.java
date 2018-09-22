@@ -1,10 +1,12 @@
 package com.barabank.dao;
 
 import com.barabank.beans.*;
+import com.barabank.service.exceptions.UserNotExistException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,16 +41,15 @@ public class BarabankDao implements BankDao {
     }
 
     @Override
-    public Person findPersonWithPassportID(long passportId) {
-        return (Person) entityManager.createQuery("from Person p where p.passportId=:passportId").
-                setParameter("passportId",passportId).getSingleResult();
+    public Person findPersonWithPassportID(long passportId)  throws NoResultException{
+            return (Person) entityManager.createQuery("from Person p where p.passportId=:passportId").
+                    setParameter("passportId", passportId).getSingleResult();
     }
 
 
     @Override
-    public Person findPersonByPhone(long phone) {
-        return (Person)entityManager.createQuery("from Person p where p.phone=:phone").
-                setParameter("phone",phone).getSingleResult();
+    public Person findPersonByPhone(long phone) throws NoResultException{
+            return findCustomerByPhone(phone).getPerson();
     }
 
     @Override
@@ -69,15 +70,15 @@ public class BarabankDao implements BankDao {
     }
 
     @Override
-    public Customer findCustomerByPhone(long phone) {
-        return (Customer) entityManager.createQuery("from Customer c where c.phone=:phone").
-                setParameter("phone",phone).getSingleResult();
+    public Customer findCustomerByPhone(long phone) throws NoResultException {
+            return (Customer) entityManager.createQuery("from Customer c where c.phone=:phone").
+                    setParameter("phone", phone).getSingleResult();
     }
 
     @Override
-    public Customer findCustomerById(long customerId) {
-        return (Customer) entityManager.createQuery("from Customer c where c.customerId=:customerId").
-                setParameter("customerId",customerId).getSingleResult();
+    public Customer findCustomerById(long customerId) throws NoResultException{
+            return (Customer) entityManager.createQuery("from Customer c where c.customerId=:customerId").
+                    setParameter("customerId", customerId).getSingleResult();
     }
 
     @Override
@@ -114,7 +115,7 @@ public class BarabankDao implements BankDao {
     }
 
     @Override
-    public Account findAccountById(long accountId) {
+    public Account findAccountById(long accountId) throws NoResultException{
         return (Account)entityManager.createQuery("from Account a where a.accountId=:id").
                 setParameter("id",accountId).getSingleResult();
     }
@@ -142,19 +143,19 @@ public class BarabankDao implements BankDao {
     }
 
     @Override
-    public List<Transaction> findAllTransactionsForAccount(long accountId) {
+    public List<Transaction> findAllTransactionsForAccount(long accountId) throws NoResultException{
         return entityManager.createQuery("from Transaction t where t.fromAccount=:id OR t.toAccount=:id").
                 setParameter("id",accountId).getResultList();
     }
 
     @Override
-    public List<Transaction> findAllSentAccountTransactions(long accountId) {
+    public List<Transaction> findAllSentAccountTransactions(long accountId) throws NoResultException{
         return entityManager.createQuery("from Transaction  t where t.fromAccount=:id").
                 setParameter("id",accountId).getResultList();
     }
 
     @Override
-    public List<Transaction> findAllReceivedAccountTransactions(long accountId) {
+    public List<Transaction> findAllReceivedAccountTransactions(long accountId) throws NoResultException{
         return entityManager.createQuery("from Transaction  t where t.toAccount=:id").
                 setParameter("id",accountId).getResultList();
     }

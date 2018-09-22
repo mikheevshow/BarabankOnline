@@ -5,6 +5,7 @@ import com.barabank.beans.Person;
 import com.barabank.mvc.site.util.SessionChecker;
 import com.barabank.service.enums.TransactionReportType;
 import com.barabank.service.logic.BankTransactionReportService;
+import com.barabank.service.logic.BarabankUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,15 +20,11 @@ import javax.servlet.http.HttpSession;
 public class AccountController {
 
     @Resource
+    BarabankUserService barabankUserService;
+
+    @Resource
     BankTransactionReportService bankTransactionReportService;
 
-    public BankTransactionReportService getBankTransactionReportService() {
-        return bankTransactionReportService;
-    }
-
-    public void setBankTransactionReportService(BankTransactionReportService bankTransactionReportService) {
-        this.bankTransactionReportService = bankTransactionReportService;
-    }
 
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView privateAccountPage(HttpServletRequest request) {
@@ -41,18 +38,21 @@ public class AccountController {
             Person person = (Person) session.getAttribute("person");
             Customer customer = (Customer) session.getAttribute("customer");
 
+            customer = barabankUserService.findCustomerByPhone(customer.getPhone());
+            person=customer.getPerson();
 
             String accountHolderName = person.getFirstName() + " " + person.getMiddleName() + " " + person.getLastName();
+
+            modelAndView.setViewName("account");
 
             //Устанавливаем параметры пользователя
             modelAndView.addObject("accountHolderName", accountHolderName);
             modelAndView.addObject("birthDate", person.getBirthDate().toString());
-            modelAndView.addObject("phone", person.getPhone());
+            modelAndView.addObject("phone", customer.getPhone());
 
             modelAndView.addObject("transactions", bankTransactionReportService.getAllTransactionsForCustomer(customer, TransactionReportType.JSON));
-            modelAndView.setViewName("account");
             modelAndView.addObject("signInSingOut", SessionChecker.sessionCheck(request));
-            modelAndView.addObject("acoountsJson",customer.getAccounts().toString());
+            modelAndView.addObject("accountsJson",customer.getAccounts().toString());
 
             modelAndView.addObject("transactionJSON",bankTransactionReportService.getAllTransactionsForCustomer(customer,TransactionReportType.JSON));
 

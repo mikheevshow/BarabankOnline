@@ -1,9 +1,17 @@
 package com.barabank.service.exceptions;
 
-public class UserNotExistException extends Exception {
+import javax.persistence.NoResultException;
 
-    public UserNotExistException(String message) {
+public class UserNotExistException extends NoResultException {
+    private Exception exception;
+
+    public UserNotExistException(String message,Exception exception) {
         super(message);
+        this.exception = exception;
+    }
+
+    public Exception getException() {
+        return exception;
     }
 
 }

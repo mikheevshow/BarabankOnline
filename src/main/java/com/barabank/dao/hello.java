@@ -1,11 +1,15 @@
 package com.barabank.dao;
 
+import com.barabank.beans.Account;
 import com.barabank.beans.Customer;
 import com.barabank.beans.Person;
 import com.barabank.beans.Transaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedType;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,100 +20,31 @@ public class hello {
         ApplicationContext context = new GenericXmlApplicationContext("application-context.xml");
         BankDao bankDao = context.getBean("barabankDao", BankDao.class);
 
-
 //        Customer customer = new Customer();
-//        customer.setPhone(54L);
-//        customer.setPassword("rgwenrncoeiqpr");
-//
-//        customer = bankDao.saveCustomer(customer);
+//        customer.setPhone(1234);
+//        customer.setPassword("asdf");
 //
 //        Person person = new Person();
-//        LocalDate localDate = LocalDate.of(1111, 11, 1);
-//        person.setPassportId(123421L);
-//        person.setAddress("sdng");
-//        person.setFirstName("Ivan");
-//        person.setLastName("Ivanov");
-//        person.setMiddleName("Ivanovih");
-//        person.setBirthDate(localDate);
 //        person.setCustomer(customer);
+//        person.setPassportId(456789);
+//        person.setFirstName("Нитика");
+//        person.setLastName("Изотов");
+//        person.setMiddleName("Владимирович");
+//        person.setAddress("Москва");
+//        person.setBirthDate(LocalDate.now().minusYears(22));
 //
-//        person = bankDao.savePerson(person);
-//
-//
-//        System.out.println("HERE");
-//
-//        for (int i = 0; i < 10; i++) {
-//            bankDao.addAccountForCustomer(customer);
-//        }
-
-//
-//        Person person = bankDao.findPersonWithPassportID(123421L);
-//
-//        System.out.println(person.toString());
-//
-//        person.setLastName("Zemenkov");
-//        bankDao.updatePerson(person);
-//
-//        System.out.println(person.toString());
-//
-//        for (int i=342;i<=351;i++){
-//            for(int j=342;j<=351;j++) {
-//                Transaction transaction = new Transaction();
-//                if(i!=j) {
-//                    transaction.setFromAccount(i);
-//                    transaction.setToAccount(j);
-//                    transaction.setDate(LocalDateTime.now());
-//                    transaction.setSum(BigDecimal.valueOf((long)i+j));
-//                    bankDao.saveTransaction(transaction);
-//                }
-//            }
-//        }
-//
-//
-//        LocalDate today = LocalDate.now().minusDays(1);
-//
-//        List<Transaction> transactions = bankDao.getBankTransactionsForDay(today);
-//
-//
-//        System.out.println("////////////////////////////////////////////////");
-//        for (Transaction transaction : transactions) {
-//            System.out.println(transaction.toString());
-//        }
-
-
-//
-//
-//    Customer customer = new Customer();
-//    customer.setPhone(12345L);
-//    customer.setPassword("yterfwd");
-//
-//        Person person = new Person();
-//        person.setPassportId(54321L);
-//        person.setFirstName("dfwe");
-//        person.setLastName("sdaff");
-//        person.setMiddleName("dsfgw");
-//        person.setBirthDate(LocalDate.of(2000, 1, 1));
-//        person.setPhone(12345L);
-//        person.setAddress("asfasdf");
-//
-//        person.setCustomer(customer);
 //        customer.setPerson(person);
-//
 //
 //        bankDao.saveCustomer(customer);
 
-        //System.out.println(bankDao.findCustomerById(662));
-        System.out.println("//////////1///////////");
-        System.out.println(bankDao.findCustomerByPhone(89999698828L));
+//        Customer as = bankDao.findCustomerByPhone(1234);
+//
+//        System.out.println(as.toString());
+//        System.out.println(as.getPerson().toString());
 
-        System.out.println("//////////2///////////");
-        System.out.println(bankDao.findPersonByPhone(89999698828L));
+        Person person = bankDao.findPersonByPhone(1234);
 
-        System.out.println("//////////3///////////");
-        System.out.println(bankDao.findPersonByPhone(89999698828L).getCustomer().toString());
-
-     //   System.out.println("///////////4//////////");
-     //   System.out.println(bankDao.findCustomerByPhone(54L).getPerson().toString());
-
+        System.out.println(person);
+        System.out.println(person.getCustomer());
     }
 }

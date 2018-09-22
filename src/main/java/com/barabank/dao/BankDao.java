@@ -14,43 +14,43 @@ import java.util.List;
 public interface BankDao {
 
 
-    public List findAllPersons();
-    public Person findPersonWithPassportID(long passportId);
-    public Person findPersonByPhone(long phone);
-    public Person updatePerson(Person person);
-    public Person savePerson(Person person);
+     List findAllPersons();
+     Person findPersonWithPassportID(long passportId);
+     Person findPersonByPhone(long phone);
+     Person updatePerson(Person person);
+     Person savePerson(Person person);
 
-    public List<Customer> findAllCustomers();
-    public Customer findCustomerByPhone(long customer_phone);
-    public Customer findCustomerById(long id);
-    public Customer updateCustomer(Customer customer);
-    public Customer saveCustomer(Customer customer);
+     List<Customer> findAllCustomers();
+     Customer findCustomerByPhone(long customer_phone);
+     Customer findCustomerById(long id);
+     Customer updateCustomer(Customer customer);
+     Customer saveCustomer(Customer customer);
 
-    public void createUser(Customer customer, Person person);
+     void createUser(Customer customer, Person person);
 
-    public Account addAccountForCustomer(Customer customer);
-    public Account updateAccount(Account account);
-    public Account findAccountById(long accountId);
-
-
-    public List<BankCard> getAccountBindedCards(long account_number);
-    public BankCard findCardByCardNumber(long card_number);
-   // public BankCard addCardForAccount(BigInteger account_id);
-    public Account findAccountByCardNumber(long card_number);
+     Account addAccountForCustomer(Customer customer);
+     Account updateAccount(Account account);
+     Account findAccountById(long accountId);
 
 
-    public List<Transaction> findAllTransactions();
-    public List<Transaction> findAllTransactionsForAccount(long account_id);
-    public List<Transaction> findAllSentAccountTransactions(long account_id);
-    public List<Transaction> findAllReceivedAccountTransactions(long account_id);
-    public Transaction saveTransaction(Transaction transaction);
+     List<BankCard> getAccountBindedCards(long account_number);
+     BankCard findCardByCardNumber(long card_number);
+   //  BankCard addCardForAccount(BigInteger account_id);
+     Account findAccountByCardNumber(long card_number);
 
 
-    public List<Transaction> getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate);
-    public List<Transaction> getBankTransactionsForDay(LocalDate date);
-    public List<Transaction> getTransactionsForCustomerInPeriod(Customer customer, LocalDate startDate, LocalDate endDate);
-    public List<Transaction> getTransactionsForCustomerInDate(Customer customer, LocalDate date);
-    public List<Transaction> getTransactionsForAccountInPeriod(long account, LocalDate startDate, LocalDate endDate);
-    public List<Transaction> getTransactionsForAccountInDate(long account, LocalDate date);
+     List<Transaction> findAllTransactions();
+     List<Transaction> findAllTransactionsForAccount(long account_id);
+     List<Transaction> findAllSentAccountTransactions(long account_id);
+     List<Transaction> findAllReceivedAccountTransactions(long account_id);
+     Transaction saveTransaction(Transaction transaction);
+
+
+     List<Transaction> getBankTransactionsForPeriod(LocalDate startDate, LocalDate endDate);
+     List<Transaction> getBankTransactionsForDay(LocalDate date);
+     List<Transaction> getTransactionsForCustomerInPeriod(Customer customer, LocalDate startDate, LocalDate endDate);
+     List<Transaction> getTransactionsForCustomerInDate(Customer customer, LocalDate date);
+     List<Transaction> getTransactionsForAccountInPeriod(long account, LocalDate startDate, LocalDate endDate);
+     List<Transaction> getTransactionsForAccountInDate(long account, LocalDate date);
 
 }
