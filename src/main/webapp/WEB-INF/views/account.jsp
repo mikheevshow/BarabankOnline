@@ -39,7 +39,7 @@
         </div>
 
         <div class=" replenish-funds-button button-type-one">
-            Пополнить
+            <a href="/refill"> Пополнить </a>
         </div>
 
     </div>

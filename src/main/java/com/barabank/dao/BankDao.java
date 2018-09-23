@@ -2,6 +2,7 @@ package com.barabank.dao;
 
 import com.barabank.beans.*;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public interface BankDao {
 
      Account addAccountForCustomer(Customer customer);
      Account updateAccount(Account account);
-     Account findAccountById(long accountId);
+     Account findAccountById(long accountId) throws NoResultException;
 
 
      List<BankCard> getAccountBindedCards(long account_number);

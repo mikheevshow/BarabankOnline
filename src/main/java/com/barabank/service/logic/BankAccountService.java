@@ -8,12 +8,14 @@ import java.math.BigDecimal;
 
 public interface BankAccountService {
 
-    public Account openBankAccountFor(Customer forCustomer);
+     Account openBankAccountFor(Customer forCustomer);
 
-    public void addCardToAccount(long accountNumber, BankCardPaymentSystem bankCardPaymentSystem);
+     void addCardToAccount(long accountNumber, BankCardPaymentSystem bankCardPaymentSystem);
 
-    public BigDecimal getBalanceWithAccountId(long accountNumber);
+     BigDecimal getBalanceWithAccountId(long accountNumber);
 
-    public BigDecimal getBalanceWithCardNumber(long cardNumber);
+     BigDecimal getBalanceWithCardNumber(long cardNumber);
+
+     Account findAccountById(long accountId);
 
 }

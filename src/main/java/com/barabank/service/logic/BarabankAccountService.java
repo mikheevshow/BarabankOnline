@@ -74,4 +74,9 @@ public class BarabankAccountService implements BankAccountService {
     public BigDecimal getBalanceWithCardNumber(long cardNumber) {
         return bankDao.findAccountByCardNumber(cardNumber).getBalance();
     }
+
+    @Override
+    public Account findAccountById(long accountId) {
+        return bankDao.findAccountById(accountId);
+    }
 }

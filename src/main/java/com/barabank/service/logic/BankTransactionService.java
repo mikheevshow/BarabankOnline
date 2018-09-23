@@ -1,17 +1,24 @@
 package com.barabank.service.logic;
 
+import com.barabank.beans.Account;
+import com.barabank.beans.Customer;
 import com.barabank.beans.Transaction;
 import com.barabank.service.exceptions.*;
+
+import javax.persistence.NoResultException;
 import java.math.BigDecimal;
 
 public interface BankTransactionService {
 
-    public void transferMoney(long fromAccount, long toAccount, BigDecimal sum) throws InsufficientFundsException;
+     void transferMoney(long fromAccount, long toAccount, BigDecimal sum)
+             throws InsufficientFundsException,NoResultException;
 
-    public void addTransaction(Transaction transaction);
+     void addTransaction(Transaction transaction);
 
-    public void withdrawalFromAccount(long account, BigDecimal sum) throws InsufficientFundsException;
+     void withdrawalFromAccount(long accountId, BigDecimal sum) throws InsufficientFundsException, NoResultException;
 
-    public void refillAccount(long account, BigDecimal sum);
+     void refillAccount(long accountId, BigDecimal sum) throws NoResultException;
+
+     void checkCustomerAccount (Customer customer,long accountId) throws AccountNumberExeption;
 
 }

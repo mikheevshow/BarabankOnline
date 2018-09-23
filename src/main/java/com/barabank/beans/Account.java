@@ -32,6 +32,9 @@ public class Account implements Serializable {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @Column(name = "customer_id",insertable = false, updatable = false)
+    private long customerId;
+
     @OneToMany(mappedBy = "account")
     private List<BankCard> bankCardSet = new ArrayList<>();
 
@@ -67,6 +70,15 @@ public class Account implements Serializable {
 
     public void addBankCards(Collection<? extends BankCard> collection){
         bankCardSet.addAll(collection);
+
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public List<BankCard> getBankCardSet() {
@@ -77,11 +89,12 @@ public class Account implements Serializable {
         this.bankCardSet = bankCardSet;
     }
 
+
     @Override
     public String toString() {
         return "Account{" +
                 "account_id=" + accountId +
-                ", customer._id=" + customer.getCustomerId() +
+                ", customer_id=" + customerId +
                 ", sum=" + balance +
                 '}';
     }
